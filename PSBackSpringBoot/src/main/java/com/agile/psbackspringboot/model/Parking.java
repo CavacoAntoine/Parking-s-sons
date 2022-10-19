@@ -85,8 +85,7 @@ public class Parking {
      * @return Une liste des places coresspondant au type
      */
     public List<Place> searchPlaceLibre(TypePlace type){
-        //TODO
-        return Collections.emptyList();
+        return this.places.stream().filter(place -> place.getType() == type).toList();
     }
 
     /**
@@ -95,7 +94,13 @@ public class Parking {
      * @throws PlaceNotFoundException si la place de numéro numero n'existe pas
      */
     public void occuperPlace(int numero) throws PlaceNotFoundException {
-        //TODO
+        for(Place place : this.places) {
+            if(place.getNumero() == numero){
+                place.setLibre(false);
+                return;
+            }
+        }
+        throw new PlaceNotFoundException(numero);
     }
 
     /**
@@ -103,7 +108,13 @@ public class Parking {
      * @param numero Le numero de la place
      */
     public void libererPlace(int numero) throws PlaceNotFoundException{
-        //TODO
+        for(Place place : this.places) {
+            if(place.getNumero() == numero){
+                place.setLibre(true);
+                return;
+            }
+        }
+        throw new PlaceNotFoundException(numero);
     }
 
     public Adresse getAdresse() {

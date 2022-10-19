@@ -21,9 +21,11 @@ public class PlaceTests {
     }
 
     @Test
-    public void should_getType() {
+    public void should_setType() {
         Place place = new Place();
         Assertions.assertSame(place.getType(), TypePlace.NORMALE);
+        place.setType(TypePlace.HANDICAPE);
+        Assertions.assertSame(place.getType(), TypePlace.HANDICAPE);
     }
 
     @Test
