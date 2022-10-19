@@ -85,7 +85,7 @@ public class Parking {
      * @return Une liste des places coresspondant au type
      */
     public List<Place> searchPlaceLibre(TypePlace type){
-        return this.places.stream().filter(place -> place.getType() == type).toList();
+        return this.places.stream().filter(place -> (place.getType() == type && place.isLibre())).toList();
     }
 
     /**

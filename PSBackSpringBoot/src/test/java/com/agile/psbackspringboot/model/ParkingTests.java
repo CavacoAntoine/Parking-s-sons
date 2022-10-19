@@ -54,9 +54,9 @@ public class ParkingTests {
         Parking parking = new Parking("Parking 1", new Adresse(), 1,2,3,4,5);
         try{
             parking.occuperPlace(1);
-            Assertions.assertFalse(parking.getPlaces().get(1).isLibre());
+            Assertions.assertFalse(parking.getPlaces().get(0).isLibre());
             parking.libererPlace(1);
-            Assertions.assertTrue(parking.getPlaces().get(1).isLibre());
+            Assertions.assertTrue(parking.getPlaces().get(0).isLibre());
         } catch (PlaceNotFoundException e) {
             Assertions.fail();
         }
