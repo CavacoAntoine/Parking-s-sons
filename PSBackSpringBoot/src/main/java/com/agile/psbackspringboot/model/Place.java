@@ -3,18 +3,21 @@ package com.agile.psbackspringboot.model;
 import com.agile.psbackspringboot.enums.TypePlace;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
 public class Place {
 
     @Id
+    @GeneratedValue
     private int numero;
 
     private TypePlace type;
     private boolean libre;
 
     public Place() {
+        this(TypePlace.NORMALE, 1);
     }
 
     public Place(TypePlace type, int numero) {
