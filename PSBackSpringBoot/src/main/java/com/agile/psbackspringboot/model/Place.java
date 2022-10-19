@@ -11,7 +11,7 @@ public class Place {
 
     @Id
     @GeneratedValue
-    private int numero;
+    private long numero;
 
     private TypePlace type;
     private boolean libre;
@@ -38,7 +38,7 @@ public class Place {
         this.libre=libre;
     }
 
-    public int getNumero() {
+    public long getNumero() {
         return this.numero;
     }
 }
