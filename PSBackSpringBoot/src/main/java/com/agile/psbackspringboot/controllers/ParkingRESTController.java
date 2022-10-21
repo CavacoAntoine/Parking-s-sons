@@ -30,7 +30,7 @@ public class ParkingRESTController {
     @PostMapping
     public ResponseEntity<?> addParking(@RequestBody Parking parking) {
         if(this.parkingRepository.existsByNom(parking.getNom())) {
-            return new ResponseEntity<>(new ResponseMessage("Fail -> Parking d√©j√† existant."), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new ResponseMessage("Fail -> Parking dÈj‡ existant."), HttpStatus.BAD_REQUEST);
         }
         this.parkingRepository.save(parking);
         return new ResponseEntity<>(parking, HttpStatus.CREATED);
