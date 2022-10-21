@@ -1,5 +1,6 @@
 package com.agile.psbackspringboot.controllers;
 
+import com.agile.psbackspringboot.creator.ParkingCreator;
 import com.agile.psbackspringboot.message.ResponseMessage;
 import com.agile.psbackspringboot.model.Parking;
 import com.agile.psbackspringboot.repository.ParkingRepository;
@@ -28,10 +29,11 @@ public class ParkingRESTController {
     }
 
     @PostMapping
-    public ResponseEntity<?> addParking(@RequestBody Parking parking) {
-        if(this.parkingRepository.existsByNom(parking.getNom())) {
+    public ResponseEntity<?> addParking(@RequestBody ParkingCreator parkingCreator) {
+        if(this.parkingRepository.existsByNom(parkingCreator.getNom())) {
             return new ResponseEntity<>(new ResponseMessage("Fail -> Parking déjà existant."), HttpStatus.BAD_REQUEST);
         }
+        Parking parking = parkingCreator.create();
         this.parkingRepository.save(parking);
         return new ResponseEntity<>(parking, HttpStatus.CREATED);
     }

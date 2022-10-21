@@ -4,15 +4,19 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { PersonneComponent } from './personne/personne.component';
 import {HttpClientModule} from "@angular/common/http";
+import { ParkingComponent } from './parking/parking.component';
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
     AppComponent,
-    PersonneComponent
+    PersonneComponent,
+    ParkingComponent
   ],
   imports: [
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

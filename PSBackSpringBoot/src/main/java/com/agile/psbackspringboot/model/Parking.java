@@ -2,6 +2,7 @@ package com.agile.psbackspringboot.model;
 
 import com.agile.psbackspringboot.enums.TypePlace;
 import com.agile.psbackspringboot.exceptions.PlaceNotFoundException;
+import org.hibernate.annotations.Fetch;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -16,7 +17,7 @@ public class Parking {
 
     private String nom;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Place> places;
 
     @OneToOne(cascade = CascadeType.ALL)
@@ -128,7 +129,7 @@ public class Parking {
         this.nom = nom;
     }
 
-    protected List<Place> getPlaces() {
+    public List<Place> getPlaces() {
         return places;
 
     }
