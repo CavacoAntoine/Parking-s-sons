@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {catchError, Observable, of, tap} from "rxjs";
 import {Parking} from "./parking";
 import {ParkingCreator} from "./parking-creator";
+import {Place} from "./place/place";
 
 const httpOptions = {
   headers: new HttpHeaders({'content-type': 'application/json'})
@@ -28,15 +29,23 @@ export class ParkingService {
     return this.http.post<Parking>(this.parkingUrl, parking, httpOptions);
   }
 
+  getPlaceLibre(id: number): Observable<Array<Place>>{
+    const url = `${this.parkingUrl}/${id}/placelibre`;
+    return this.http.get<Array<Place>>(url).pipe(
+      tap(),
+      catchError(this.handleError<Array<Place>>(`getPlaceLibre for parking : ${id}`))
+    );
+  }
+
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.error(error);
-      this.log(`${operation} failed : ${error.message}`);
+      ParkingService.log(`${operation} failed : ${error.message}`);
       return of(result as T);
     };
   }
 
-  private log(message: string) {
+  private static log(message: string) {
     console.log('ParkingService: ' + message);
   }
 }
