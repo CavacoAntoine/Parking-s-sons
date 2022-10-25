@@ -57,5 +57,18 @@ public class PlaceTests {
         Assertions.assertEquals(1, place.getNumero());
     }
 
+    @Test
+    public void setNumero_throw_illegal_argument(){
+        Place place = new Place();
+        Assertions.assertThrows(IllegalArgumentException.class,() -> place.setNumero(-1));
+    }
+
+    @Test
+    public void should_setNumero_correctly() {
+        Place place = new Place();
+        Assertions.assertSame(place.getNumero(), 1);
+        place.setNumero(4);
+        Assertions.assertSame(place.getNumero(), 4);
+    }
 
 }

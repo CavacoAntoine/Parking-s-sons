@@ -53,6 +53,7 @@ public class Place {
     }
 
     public void setNumero(int numero) {
+        if(numero < 0) throw new IllegalArgumentException();
         this.numero = numero;
     }
 }
