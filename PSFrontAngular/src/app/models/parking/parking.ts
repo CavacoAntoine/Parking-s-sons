@@ -1,4 +1,4 @@
-import {Place} from "./place/place";
+import {Place} from "../place/place";
 import {Adresse} from "../adresse/adresse";
 
 export class Parking {

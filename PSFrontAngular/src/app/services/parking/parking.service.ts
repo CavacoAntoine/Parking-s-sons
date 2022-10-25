@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {catchError, Observable, of, tap} from "rxjs";
-import {Parking} from "./parking";
-import {ParkingCreator} from "./parking-creator";
-import {Place} from "./place/place";
+import {Parking} from "../../models/parking/parking";
+import {ParkingCreator} from "../../models/parking/parking-creator";
+import {Place} from "../../models/place/place";
 
 const httpOptions = {
   headers: new HttpHeaders({'content-type': 'application/json'})

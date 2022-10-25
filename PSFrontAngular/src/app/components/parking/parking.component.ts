@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {Parking} from "./parking";
-import {ParkingService} from "./parking.service";
-import {ParkingCreator} from "./parking-creator";
+import {Parking} from "../../models/parking/parking";
+import {ParkingService} from "../../services/parking/parking.service";
+import {ParkingCreator} from "../../models/parking/parking-creator";
 
 @Component({
   selector: 'app-parking',
