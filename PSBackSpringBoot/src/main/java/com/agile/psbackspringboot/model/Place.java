@@ -36,6 +36,7 @@ public class Place {
     }
 
     public void setType(TypePlace type) {
+        if(type == null) throw new IllegalArgumentException();
         this.type = type;
     }
 

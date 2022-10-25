@@ -8,11 +8,6 @@ import org.junit.jupiter.api.Test;
 public class ParkingTests {
 
     @Test
-    public void alwaysTrue() {
-        Assertions.assertTrue(true);
-    }
-
-    @Test
     public void should_create_parking() {
         Parking parking = new Parking();
         Assertions.assertTrue(parking != null && parking.getNom().equals("EMPTY") && parking.getAdresse() != null && parking.getPlaces() != null && parking.getPlaces().size() == 0);

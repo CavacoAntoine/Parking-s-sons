@@ -6,11 +6,6 @@ import org.junit.jupiter.api.Test;
 public class AdresseTests {
 
     @Test
-    public void alwaysTrue() {
-        Assertions.assertTrue(true);
-    }
-
-    @Test
     public void should_create_adresse() {
         Adresse adresse = new Adresse();
         Assertions.assertNotNull(adresse);

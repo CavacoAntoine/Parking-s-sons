@@ -7,11 +7,6 @@ import org.junit.jupiter.api.Test;
 public class PlaceTests {
 
     @Test
-    public void alwaysTrue() {
-        Assertions.assertTrue(true);
-    }
-
-    @Test
     public void should_createPlace() {
         Place place = new Place();
         Assertions.assertTrue(place != null && place.getNumero() == 1 && place.isLibre() && place.getType() == TypePlace.NORMALE);
@@ -21,7 +16,13 @@ public class PlaceTests {
     }
 
     @Test
-    public void should_setType() {
+    public void setType_throw_illegal_argument(){
+        Place place = new Place();
+        Assertions.assertThrows(IllegalArgumentException.class,() -> place.setType(null));
+    }
+
+    @Test
+    public void should_setType_correctly() {
         Place place = new Place();
         Assertions.assertSame(place.getType(), TypePlace.NORMALE);
         place.setType(TypePlace.HANDICAPE);
