@@ -1,0 +1,25 @@
+/*** Hero Header ***/
+.hero-header {
+  margin-bottom: 0rem;
+  padding: 12rem 0 9rem 0;
+  background: center bottom no-repeat;
+}
+
+.page-header {
+  margin-bottom: 0rem;
+  padding: 12rem 0 6rem 0;
+}
+
+@media (max-width: 991.98px) {
+  .hero-header {
+    padding: 6rem 0 9rem 0;
+  }
+
+  .page-header {
+    padding: 6rem 0;
+  }
+}
+
+.page-header .breadcrumb-item+.breadcrumb-item::before {
+  color: rgba(256, 256, 256, .5);
+}

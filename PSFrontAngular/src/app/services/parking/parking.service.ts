@@ -25,6 +25,22 @@ export class ParkingService {
     );
   }
 
+  getParkingsLibres(): Observable<Array<Parking>>{
+    const url = `${this.parkingUrl}/libres`;
+    return this.http.get<Array<Parking>>(url).pipe(
+      tap(),
+      catchError(this.handleError<Array<Parking>>(`getParkingsLibres `))
+    );
+  }
+
+  getParkingsComplets(): Observable<Array<Parking>>{
+    const url = `${this.parkingUrl}/complets`;
+    return this.http.get<Array<Parking>>(url).pipe(
+      tap(),
+      catchError(this.handleError<Array<Parking>>(`getParkingsComplets `))
+    );
+  }
+
   addParking(parking: ParkingCreator): Observable<Parking>{
     return this.http.post<Parking>(this.parkingUrl, parking, httpOptions);
   }

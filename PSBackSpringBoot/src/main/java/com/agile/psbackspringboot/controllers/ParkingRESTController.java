@@ -31,6 +31,18 @@ public class ParkingRESTController {
         return this.parkingRepository.findAll();
     }
 
+    @GetMapping("/libres")
+    public List<Parking> getParkingsLibres() {
+        List<Parking> parkings = this.parkingRepository.findAll();
+        return parkings.stream().filter(parking -> parking.getPlaces().stream().filter(place -> place.isLibre()).toList().size() > 0).toList();
+    }
+
+    @GetMapping("/complets")
+    public List<Parking> getParkingsComplets() {
+        List<Parking> parkings = this.parkingRepository.findAll();
+        return parkings.stream().filter(parking -> parking.getPlaces().stream().filter(place -> place.isLibre()).toList().size() == 0).toList();
+    }
+
     @GetMapping("/{id}/placelibre")
     public List<Place> getAllPlaceLibre(@PathVariable("id") long id) {
         Parking parking = this.parkingRepository.findById(id);

@@ -1,0 +1,56 @@
+<div>
+  <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+
+    <div class="form-group">
+      <label for="nom">Nom du parking</label>
+      <input id="nom" type="text" class="form-control" name="nom" [(ngModel)]="parking.nom" required />
+    </div>
+    Entrer le nombre de place pour chaque catégorie :<br/>
+    <div class="form-group">
+      <label for="normal">Normale</label>
+      <input id="normal" [min]="0" type="number" class="form-control" name="normal" [(ngModel)]="parking.nbrNormPlace" required />
+    </div>
+    <div class="form-group">
+      <label for="handi">Handicapée</label>
+      <input id="handi" [min]="0" type="number" class="form-control" name="handi" [(ngModel)]="parking.nbrHandiPlace" required />
+    </div>
+    <div class="form-group">
+      <label for="deuxR">Deux roues</label>
+      <input id="deuxR" [min]="0" type="number" class="form-control" name="deuxR" [(ngModel)]="parking.nbrDeuxRPlace" required />
+    </div>
+    <div class="form-group">
+      <label for="long">Longue</label>
+      <input id="long" [min]="0" type="number" class="form-control" name="long" [(ngModel)]="parking.nbrLongPlace" required />
+    </div>
+    <div class="form-group">
+      <label for="elec">Electrique</label>
+      <input id="elec" [min]="0" type="number" class="form-control" name="elec" [(ngModel)]="parking.nbrElecPlace" required />
+    </div>
+
+    Adresse du parking : <br/>
+    <div class="form-group">
+      <label for="num">Numéro</label>
+      <input id="num" [min]="0" type="number" class="form-control" name="num" [(ngModel)]="parking.adresse.numero" required />
+    </div>
+    <div class="form-group">
+      <label for="rue">Rue</label>
+      <input id="rue" type="text" class="form-control" name="rue" [(ngModel)]="parking.adresse.rue" required />
+    </div>
+    <div class="form-group">
+      <label for="cp">Code Postal</label>
+      <input id="cp" [min]="0" [minlength]="5" type="number" class="form-control" name="cp" [(ngModel)]="parking.adresse.codePostal" required />
+    </div>
+    <div class="form-group">
+      <label for="ville">Ville</label>
+      <input id="ville" type="text" class="form-control" name="ville" [(ngModel)]="parking.adresse.ville" required />
+    </div>
+
+    <button>Add parking</button>
+    <div *ngIf="f.submitted && !ok" class="alert alert-warning">
+      Added parking failed!<br/>
+    </div>
+    <div *ngIf="f.submitted && ok" class="alert alert-warning">
+      Added parking succeeded!<br/>
+    </div>
+  </form>
+</div>
