@@ -1,56 +1,149 @@
-<div>
-  <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
-
-    <div class="form-group">
-      <label for="nom">Nom du parking</label>
-      <input id="nom" type="text" class="form-control" name="nom" [(ngModel)]="parking.nom" required />
-    </div>
-    Entrer le nombre de place pour chaque catégorie :<br/>
-    <div class="form-group">
-      <label for="normal">Normale</label>
-      <input id="normal" [min]="0" type="number" class="form-control" name="normal" [(ngModel)]="parking.nbrNormPlace" required />
-    </div>
-    <div class="form-group">
-      <label for="handi">Handicapée</label>
-      <input id="handi" [min]="0" type="number" class="form-control" name="handi" [(ngModel)]="parking.nbrHandiPlace" required />
-    </div>
-    <div class="form-group">
-      <label for="deuxR">Deux roues</label>
-      <input id="deuxR" [min]="0" type="number" class="form-control" name="deuxR" [(ngModel)]="parking.nbrDeuxRPlace" required />
-    </div>
-    <div class="form-group">
-      <label for="long">Longue</label>
-      <input id="long" [min]="0" type="number" class="form-control" name="long" [(ngModel)]="parking.nbrLongPlace" required />
-    </div>
-    <div class="form-group">
-      <label for="elec">Electrique</label>
-      <input id="elec" [min]="0" type="number" class="form-control" name="elec" [(ngModel)]="parking.nbrElecPlace" required />
-    </div>
-
-    Adresse du parking : <br/>
-    <div class="form-group">
-      <label for="num">Numéro</label>
-      <input id="num" [min]="0" type="number" class="form-control" name="num" [(ngModel)]="parking.adresse.numero" required />
-    </div>
-    <div class="form-group">
-      <label for="rue">Rue</label>
-      <input id="rue" type="text" class="form-control" name="rue" [(ngModel)]="parking.adresse.rue" required />
-    </div>
-    <div class="form-group">
-      <label for="cp">Code Postal</label>
-      <input id="cp" [min]="0" [minlength]="5" type="number" class="form-control" name="cp" [(ngModel)]="parking.adresse.codePostal" required />
-    </div>
-    <div class="form-group">
-      <label for="ville">Ville</label>
-      <input id="ville" type="text" class="form-control" name="ville" [(ngModel)]="parking.adresse.ville" required />
-    </div>
-
-    <button>Add parking</button>
-    <div *ngIf="f.submitted && !ok" class="alert alert-warning">
-      Added parking failed!<br/>
-    </div>
-    <div *ngIf="f.submitted && ok" class="alert alert-warning">
-      Added parking succeeded!<br/>
-    </div>
-  </form>
+<!-- Header End -->
+<div class="container-xxl py-5 page-header mb-3 mt-5">
+  <div class="container my-5 pt-5 pb-4">
+    <h1 class="display-3 text-white mb-3 animated slideInDown">Créer un parking</h1>
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb text-uppercase">
+        <li class="breadcrumb-item"><a href="">Home</a></li>
+        <li class="breadcrumb-item text-white active" aria-current="page">Créer</li>
+      </ol>
+    </nav>
+  </div>
 </div>
+<!-- Header End -->
+
+<!-- Create Start -->
+<div class="container-xxl py-6">
+  <div class="container">
+    <div class="mx-auto text-center wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+      <div class="d-inline-block border rounded-pill text-primary px-4 mb-3">Créer</div>
+      <h2 class="mb-5">Créer un parking</h2>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-lg-7 wow fadeInUp" data-wow-delay="0.3s">
+        <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+          <div class="row g-3">
+            <div class="col-12">
+              <div class="form-floating">
+                <input name="nom" type="text" class="form-control" id="nom" placeholder="Nom du parking" [(ngModel)]="parking.nom" #nom="ngModel" required>
+                <label for="nom">Nom du parking</label>
+                <div class="alert-danger" *ngIf="f.submitted && nom.invalid">
+                  <div *ngIf="['nom.errors?.required']">Un nom est requis</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="form-floating">
+                <h5>Adresse du Parking</h5>
+              </div>
+            </div>
+            <div class="col-2-5">
+              <div class="form-floating">
+                <input name="numero" type="number" class="form-control" id="numero" placeholder="0" [(ngModel)]="parking.adresse.numero" [min]="0" #numero="ngModel" required>
+                <label for="numero">Numéro</label>
+              </div>
+              <div class="alert-danger" *ngIf="f.submitted && numero.invalid">
+                <div *ngIf="['numero.errors?.required']">Numero requis</div>
+              </div>
+            </div>
+            <div class="col-9-5">
+              <div class="form-floating">
+                <input name="rue" type="text" class="form-control" id="rue" placeholder="Rue" [(ngModel)]="parking.adresse.rue" [minlength]="5" #rue="ngModel" required>
+                <label for="rue">Rue</label>
+              </div>
+              <div class="alert-danger" *ngIf="f.submitted && rue.invalid">
+                <div *ngIf="['rue.errors?.required']">Un nom de rue est requis</div>
+              </div>
+            </div>
+            <div class="col-2-5">
+              <div class="form-floating">
+                <input name="cp" type="number" class="form-control" id="cp" placeholder="0" [(ngModel)]="parking.adresse.codePostal" [min]="0" #cp="ngModel" required>
+                <label for="cp">Code postal</label>
+              </div>
+              <div class="alert-danger" *ngIf="f.submitted && cp.invalid">
+                <div *ngIf="['cp.errors?.required']">Code postal requis</div>
+              </div>
+            </div>
+            <div class="col-9-5">
+              <div class="form-floating">
+                <input name="ville" type="text" class="form-control" id="ville" placeholder="Rue" [(ngModel)]="parking.adresse.ville" [minlength]="3" #ville="ngModel" required>
+                <label for="ville">Ville</label>
+              </div>
+              <div class="alert-danger" *ngIf="f.submitted && ville.invalid">
+                <div *ngIf="['ville.errors?.required']">Ville requise</div>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="form-floating">
+                <h5>Entrer le nombre de place pour chaque catégorie</h5>
+              </div>
+            </div>
+            <div class="col-2-5">
+              <div class="form-floating">
+                <input name="normal" type="number" class="form-control" id="normal" placeholder="0" [(ngModel)]="parking.nbrNormPlace" [min]="0" #normal="ngModel" required>
+                <label for="normal">Place normale</label>
+              </div>
+              <div class="alert-danger" *ngIf="f.submitted && normal.invalid">
+                <div *ngIf="['normal.errors?.required']">Nombre requis</div>
+                <div *ngIf="['normal.errors?.min']">Doit être positif</div>
+              </div>
+            </div>
+            <div class="col-2-5">
+              <div class="form-floating">
+                <input name="handicapée" type="number" class="form-control" id="handicapée" placeholder="0" [(ngModel)]="parking.nbrHandiPlace" [min]="0" #handi="ngModel" required>
+                <label for="handicapée">Place handicapée</label>
+              </div>
+              <div class="alert-danger" *ngIf="f.submitted && handi.invalid">
+                <div *ngIf="['handi.errors?.required']">Nombre requis</div>
+                <div *ngIf="['handi.errors?.min']">Doit être positif</div>
+              </div>
+            </div>
+            <div class="col-2-5">
+              <div class="form-floating">
+                <input name="deuxR" type="number" class="form-control" id="deux-roues" placeholder="0" [(ngModel)]="parking.nbrDeuxRPlace" [min]="0" #deuxR="ngModel" required>
+                <label for="deux-roues">Place deux roues</label>
+              </div>
+              <div class="alert-danger" *ngIf="f.submitted && deuxR.invalid">
+                <div *ngIf="['deuxR.errors?.required']">Nombre requis</div>
+                <div *ngIf="['deuxR.errors?.min']">Doit être positif</div>
+              </div>
+            </div>
+            <div class="col-2-5">
+              <div class="form-floating">
+                <input name="pl" type="number" class="form-control" id="pl" placeholder="0" [(ngModel)]="parking.nbrLongPlace" [min]="0" #pl="ngModel" required>
+                <label for="pl">Place poids lourds</label>
+              </div>
+              <div class="alert-danger" *ngIf="f.submitted && pl.invalid">
+                <div *ngIf="['pl.errors?.required']">Nombre requis</div>
+                <div *ngIf="['pl.errors?.min']">Doit être positif</div>
+              </div>
+            </div>
+            <div class="col-2-5">
+              <div class="form-floating">
+                <input name="electrique" type="number" class="form-control" id="electrique" placeholder="0" [(ngModel)]="parking.nbrElecPlace" [min]="0" #elec="ngModel" required>
+                <label for="electrique">Place electrique</label>
+              </div>
+              <div class="alert-danger" *ngIf="f.submitted && elec.invalid">
+                <div *ngIf="['elec.errors?.required']">Nombre requis</div>
+                <div *ngIf="['elec.errors?.min']">Doit être positif</div>
+              </div>
+            </div>
+            <div class="col-12">
+              <button class="btn btn-primary w-100 py-3" type="submit">Ajouter le parking</button>
+            </div>
+            <div class="col-12">
+              <div *ngIf="f.submitted && !ok" class="alert alert-warning">
+                Ajout du parking echoué !<br/>
+              </div>
+              <div *ngIf="f.submitted && ok" class="alert alert-warning">
+                Ajout du parking réussi !<br/>
+              </div>
+            </div>
+
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Create End -->
