@@ -3,7 +3,7 @@ package com.agile.psbackspringboot.creator;
 import com.agile.psbackspringboot.model.Adresse;
 import com.agile.psbackspringboot.model.Parking;
 
-public class ParkingCreator {
+public class ParkingFactory {
 
     private String nom;
     private int nbrNormPlace;
@@ -42,6 +42,10 @@ public class ParkingCreator {
     }
 
     public Parking create(){
+        this.nom = this.nom.toUpperCase();
+        this.adresse.setRue(this.adresse.getRue().toLowerCase());
+        String ville = this.adresse.getVille();
+        this.adresse.setVille(ville.substring(0,1).toUpperCase() + ville.substring(1).toLowerCase());
         return new Parking(nom, adresse, nbrNormPlace, nbrHandiPlace, nbrLongPlace, nbrDeuxRPlace, nbrElecPlace);
     }
 

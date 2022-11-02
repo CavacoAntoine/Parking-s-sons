@@ -2,7 +2,7 @@ package com.agile.psbackspringboot.model;
 
 import com.agile.psbackspringboot.enums.TypePlace;
 import com.agile.psbackspringboot.exceptions.PlaceNotFoundException;
-import org.hibernate.annotations.Fetch;
+import org.apache.commons.lang3.builder.EqualsBuilder;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -15,6 +15,7 @@ public class Parking {
     @GeneratedValue
     private long id;
 
+    @Column(unique=true)
     private String nom;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -132,5 +133,16 @@ public class Parking {
     public List<Place> getPlaces() {
         return places;
 
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if(o == this) return true;
+        if(o == null) return false;
+        if(o.getClass() != this.getClass()) return false;
+
+        Parking parking = (Parking) o;
+
+        return new EqualsBuilder().append(this.nom,parking.nom).append(this.places,parking.places).append(this.adresse,parking.adresse).isEquals();
     }
 }

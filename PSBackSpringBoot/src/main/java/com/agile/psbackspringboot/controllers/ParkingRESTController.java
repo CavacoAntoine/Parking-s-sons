@@ -1,6 +1,8 @@
 package com.agile.psbackspringboot.controllers;
 
-import com.agile.psbackspringboot.creator.ParkingCreator;
+import com.agile.psbackspringboot.comparator.ParkingSortByName;
+import com.agile.psbackspringboot.comparator.PlaceSortByType;
+import com.agile.psbackspringboot.creator.ParkingFactory;
 import com.agile.psbackspringboot.enums.TypePlace;
 import com.agile.psbackspringboot.message.ResponseMessage;
 import com.agile.psbackspringboot.model.Parking;
@@ -15,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins="http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/parking")
 public class ParkingRESTController {
 
@@ -28,37 +30,49 @@ public class ParkingRESTController {
 
     @GetMapping
     public List<Parking> getAllParkings() {
-        return this.parkingRepository.findAll();
+        List<Parking> parkings = this.parkingRepository.findAll();
+        parkings.sort(new ParkingSortByName());
+        return parkings;
     }
 
     @GetMapping("/libres")
     public List<Parking> getParkingsLibres() {
-        List<Parking> parkings = this.parkingRepository.findAll();
-        return parkings.stream().filter(parking -> parking.getPlaces().stream().filter(place -> place.isLibre()).toList().size() > 0).toList();
+        return this.parkingRepository.findAll().stream().filter(parking ->
+                parking.getPlaces().stream().filter(Place::isLibre).toList().size() > 0).sorted(new ParkingSortByName()).toList();
     }
 
     @GetMapping("/complets")
     public List<Parking> getParkingsComplets() {
-        List<Parking> parkings = this.parkingRepository.findAll();
-        return parkings.stream().filter(parking -> parking.getPlaces().stream().filter(place -> place.isLibre()).toList().size() == 0).toList();
+        return this.parkingRepository.findAll().stream().filter(parking ->
+                parking.getPlaces().stream().filter(Place::isLibre).toList().size() == 0).sorted(new ParkingSortByName()).toList();
     }
 
     @GetMapping("/{id}/placelibre")
     public List<Place> getAllPlaceLibre(@PathVariable("id") long id) {
         Parking parking = this.parkingRepository.findById(id);
         List<Place> placesLibres = new ArrayList<>();
-        for(TypePlace type : TypePlace.values()){
+        for (TypePlace type : TypePlace.values()) {
             placesLibres.addAll(parking.searchPlaceLibre(type));
         }
+        placesLibres.sort(new PlaceSortByType());
         return placesLibres;
     }
 
     @PostMapping
-    public ResponseEntity<?> addParking(@RequestBody ParkingCreator parkingCreator) {
-        if(this.parkingRepository.existsByNom(parkingCreator.getNom())) {
+    public ResponseEntity<?> addParking(@RequestBody ParkingFactory parkingFactory) {
+        Parking parking = parkingFactory.create();
+
+        if (this.parkingRepository.existsByNom(parking.getNom())) {
             return new ResponseEntity<>(new ResponseMessage("Fail -> Parking déjà existant."), HttpStatus.BAD_REQUEST);
         }
-        Parking parking = parkingCreator.create();
+
+        if (this.parkingRepository.existsByAdresse(parking.getAdresse().getNumero(),
+                parking.getAdresse().getRue(),
+                parking.getAdresse().getVille(),
+                parking.getAdresse().getCodePostal())) {
+            return new ResponseEntity<>(new ResponseMessage("Fail -> Un parking existe déjà à cette adresse."), HttpStatus.BAD_REQUEST);
+        }
+
         this.parkingRepository.save(parking);
         return new ResponseEntity<>(parking, HttpStatus.CREATED);
     }

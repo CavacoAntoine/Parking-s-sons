@@ -1,6 +1,7 @@
 package com.agile.psbackspringboot.model;
 
 import com.agile.psbackspringboot.enums.TypePlace;
+import org.apache.commons.lang3.builder.EqualsBuilder;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -55,5 +56,16 @@ public class Place {
     public void setNumero(int numero) {
         if(numero < 0) throw new IllegalArgumentException();
         this.numero = numero;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if(o == this) return true;
+        if(o == null) return false;
+        if(o.getClass() != this.getClass()) return false;
+
+        Place place = (Place) o;
+
+        return new EqualsBuilder().append(this.numero, place.numero).append(this.type, place.type).append(this.libre, place.libre).isEquals();
     }
 }
