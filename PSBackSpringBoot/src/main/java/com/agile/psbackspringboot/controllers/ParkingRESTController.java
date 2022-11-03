@@ -63,14 +63,14 @@ public class ParkingRESTController {
         Parking parking = parkingFactory.create();
 
         if (this.parkingRepository.existsByNom(parking.getNom())) {
-            return new ResponseEntity<>(new ResponseMessage("Fail -> Parking déjà existant."), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new ResponseMessage("nom"), HttpStatus.BAD_REQUEST);
         }
 
         if (this.parkingRepository.existsByAdresse(parking.getAdresse().getNumero(),
                 parking.getAdresse().getRue(),
                 parking.getAdresse().getVille(),
                 parking.getAdresse().getCodePostal())) {
-            return new ResponseEntity<>(new ResponseMessage("Fail -> Un parking existe déjà à cette adresse."), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new ResponseMessage("adresse"), HttpStatus.BAD_REQUEST);
         }
 
         this.parkingRepository.save(parking);

@@ -10,6 +10,7 @@ import {ParkingService} from "../../services/parking/parking.service";
 export class ParkingCreateComponent implements OnInit {
   parking: ParkingCreator;
   ok = false;
+  err = "";
 
   constructor(private parkingService: ParkingService) {
   }
@@ -24,7 +25,12 @@ export class ParkingCreateComponent implements OnInit {
         this.ok = true;
       },
       error => {
-        console.log(error);
+        if(error.error.message == 'adresse') {
+          this.err = 'Un parking existe déjà à cette adresse.';
+        }
+        else if (error.error.message == 'nom') {
+          this.err = 'Ce nom de parking est déjà utilisé.';
+        }
         this.ok=false;
       }
     );

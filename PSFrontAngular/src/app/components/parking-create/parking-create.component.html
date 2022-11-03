@@ -134,6 +134,7 @@
             <div class="col-12">
               <div *ngIf="f.submitted && !ok" class="alert alert-warning">
                 Ajout du parking echoué !<br/>
+                {{err}}
               </div>
               <div *ngIf="f.submitted && ok" class="alert alert-warning">
                 Ajout du parking réussi !<br/>
