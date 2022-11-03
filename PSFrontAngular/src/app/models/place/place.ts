@@ -1,8 +1,8 @@
-import {TypePlace} from "./type-place";
+import {TypeCar} from "../type-car";
 
 export class Place {
   id: number;
   numero: number;
-  type: TypePlace;
+  type: TypeCar;
   libre: boolean;
 }

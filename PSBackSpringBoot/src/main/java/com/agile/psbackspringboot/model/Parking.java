@@ -1,6 +1,6 @@
 package com.agile.psbackspringboot.model;
 
-import com.agile.psbackspringboot.enums.TypePlace;
+import com.agile.psbackspringboot.enums.TypeCar;
 import com.agile.psbackspringboot.exceptions.PlaceNotFoundException;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 
@@ -50,29 +50,29 @@ public class Parking {
         this.adresse = adresse;
         this.places = new ArrayList<>();
 
-        List<Place> placesNormale = createListePlaceForType(nbPlaceNormal, TypePlace.NORMALE, 1);
+        List<Place> placesNormale = createListePlaceForType(nbPlaceNormal, TypeCar.NORMALE, 1);
         places.addAll(placesNormale);
 
-        List<Place> placesHandicape = createListePlaceForType(nbPlaceHandicape, TypePlace.HANDICAPE,places.size()+1);
+        List<Place> placesHandicape = createListePlaceForType(nbPlaceHandicape, TypeCar.HANDICAPE,places.size()+1);
         places.addAll(placesHandicape);
 
-        List<Place> placesBus = createListePlaceForType(nbPlaceLong, TypePlace.LONG, places.size()+1);
+        List<Place> placesBus = createListePlaceForType(nbPlaceLong, TypeCar.LONG, places.size()+1);
         places.addAll(placesBus);
 
-        List<Place> places2roues = createListePlaceForType(nbPlace2roues, TypePlace.DEUX_ROUES, places.size()+1);
+        List<Place> places2roues = createListePlaceForType(nbPlace2roues, TypeCar.DEUX_ROUES, places.size()+1);
         places.addAll(places2roues);
 
-        List<Place> placesElec = createListePlaceForType(nbPlaceElec, TypePlace.ELECTRIQUE, places.size()+1);
+        List<Place> placesElec = createListePlaceForType(nbPlaceElec, TypeCar.ELECTRIQUE, places.size()+1);
         places.addAll(placesElec);
     }
 
-    private List<Place> createListePlaceForType(int nombre, TypePlace typePlace, int numeroDepart){
+    private List<Place> createListePlaceForType(int nombre, TypeCar typeCar, int numeroDepart){
         if (nombre<0) {
-            throw new InstantiationError("le nombre de place pour le type"+typePlace+" doit etre >= 0");
+            throw new InstantiationError("le nombre de place pour le type"+ typeCar +" doit etre >= 0");
         }
         List<Place> places = new ArrayList<>();
         for (int i = 0; i<nombre; i++) {
-            Place place = new Place(typePlace, i+numeroDepart);
+            Place place = new Place(typeCar, i+numeroDepart);
             places.add(place);
         }
 
@@ -85,7 +85,7 @@ public class Parking {
      * @param type Le type de place recherché
      * @return Une liste des places coresspondant au type
      */
-    public List<Place> searchPlaceLibre(TypePlace type){
+    public List<Place> searchPlaceLibre(TypeCar type){
         return this.places.stream().filter(place -> (place.getType() == type && place.isLibre())).toList();
     }
 

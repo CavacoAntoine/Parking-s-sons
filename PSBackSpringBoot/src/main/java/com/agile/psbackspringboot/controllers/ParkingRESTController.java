@@ -3,7 +3,7 @@ package com.agile.psbackspringboot.controllers;
 import com.agile.psbackspringboot.comparator.ParkingSortByName;
 import com.agile.psbackspringboot.comparator.PlaceSortByType;
 import com.agile.psbackspringboot.creator.ParkingFactory;
-import com.agile.psbackspringboot.enums.TypePlace;
+import com.agile.psbackspringboot.enums.TypeCar;
 import com.agile.psbackspringboot.message.ResponseMessage;
 import com.agile.psbackspringboot.model.Parking;
 import com.agile.psbackspringboot.model.Place;
@@ -51,7 +51,7 @@ public class ParkingRESTController {
     public List<Place> getAllPlaceLibre(@PathVariable("id") long id) {
         Parking parking = this.parkingRepository.findById(id);
         List<Place> placesLibres = new ArrayList<>();
-        for (TypePlace type : TypePlace.values()) {
+        for (TypeCar type : TypeCar.values()) {
             placesLibres.addAll(parking.searchPlaceLibre(type));
         }
         placesLibres.sort(new PlaceSortByType());

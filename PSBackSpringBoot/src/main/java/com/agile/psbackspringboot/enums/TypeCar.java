@@ -1,6 +1,6 @@
 package com.agile.psbackspringboot.enums;
 
-public enum TypePlace {
+public enum TypeCar {
 	NORMALE,
 	HANDICAPE,
 	DEUX_ROUES,

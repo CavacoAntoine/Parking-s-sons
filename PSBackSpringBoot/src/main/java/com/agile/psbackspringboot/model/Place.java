@@ -1,6 +1,6 @@
 package com.agile.psbackspringboot.model;
 
-import com.agile.psbackspringboot.enums.TypePlace;
+import com.agile.psbackspringboot.enums.TypeCar;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 
 import javax.persistence.Entity;
@@ -15,14 +15,14 @@ public class Place {
     private long id;
 
     private int numero;
-    private TypePlace type;
+    private TypeCar type;
     private boolean libre;
 
     public Place() {
-        this(TypePlace.NORMALE, 1);
+        this(TypeCar.NORMALE, 1);
     }
 
-    public Place(TypePlace type, int numero) {
+    public Place(TypeCar type, int numero) {
         this.type=type;
         this.libre= true;
         this.numero = numero;
@@ -32,11 +32,11 @@ public class Place {
         return this.id;
     }
 
-    public TypePlace getType() {
+    public TypeCar getType() {
         return type;
     }
 
-    public void setType(TypePlace type) {
+    public void setType(TypeCar type) {
         if(type == null) throw new IllegalArgumentException();
         this.type = type;
     }

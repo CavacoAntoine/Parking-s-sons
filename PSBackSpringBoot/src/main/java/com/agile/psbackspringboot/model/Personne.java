@@ -2,15 +2,21 @@ package com.agile.psbackspringboot.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Personne {
 
     @Id
+    private int id;
+
     private String email;
     private String nom;
     private String prenom;
     private int age;
+
+    @ManyToOne
+    private Adresse adresse;
 
     public String getEmail() {
         return email;

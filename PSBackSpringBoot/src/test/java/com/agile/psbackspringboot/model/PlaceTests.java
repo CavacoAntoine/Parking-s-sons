@@ -1,6 +1,6 @@
 package com.agile.psbackspringboot.model;
 
-import com.agile.psbackspringboot.enums.TypePlace;
+import com.agile.psbackspringboot.enums.TypeCar;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -9,10 +9,10 @@ public class PlaceTests {
     @Test
     public void should_createPlace() {
         Place place = new Place();
-        Assertions.assertTrue(place != null && place.getNumero() == 1 && place.isLibre() && place.getType() == TypePlace.NORMALE);
+        Assertions.assertTrue(place != null && place.getNumero() == 1 && place.isLibre() && place.getType() == TypeCar.NORMALE);
 
-        place = new Place(TypePlace.DEUX_ROUES, 2);
-        Assertions.assertTrue(place != null && place.getNumero() == 2 && place.isLibre() && place.getType() == TypePlace.DEUX_ROUES);
+        place = new Place(TypeCar.DEUX_ROUES, 2);
+        Assertions.assertTrue(place != null && place.getNumero() == 2 && place.isLibre() && place.getType() == TypeCar.DEUX_ROUES);
     }
 
     @Test
@@ -24,9 +24,9 @@ public class PlaceTests {
     @Test
     public void should_setType_correctly() {
         Place place = new Place();
-        Assertions.assertSame(place.getType(), TypePlace.NORMALE);
-        place.setType(TypePlace.HANDICAPE);
-        Assertions.assertSame(place.getType(), TypePlace.HANDICAPE);
+        Assertions.assertSame(place.getType(), TypeCar.NORMALE);
+        place.setType(TypeCar.HANDICAPE);
+        Assertions.assertSame(place.getType(), TypeCar.HANDICAPE);
     }
 
     @Test

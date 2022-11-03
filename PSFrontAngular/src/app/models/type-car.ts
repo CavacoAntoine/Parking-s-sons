@@ -1,4 +1,4 @@
-export enum TypePlace {
+export enum TypeCar {
   NORMALE ,
   HANDICAPE ,
   DEUX_ROUES ,

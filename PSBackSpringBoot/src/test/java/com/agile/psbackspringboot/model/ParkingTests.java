@@ -1,6 +1,6 @@
 package com.agile.psbackspringboot.model;
 
-import com.agile.psbackspringboot.enums.TypePlace;
+import com.agile.psbackspringboot.enums.TypeCar;
 import com.agile.psbackspringboot.exceptions.PlaceNotFoundException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -19,26 +19,26 @@ public class ParkingTests {
     @Test
     public void should_get_All_place_libre_for_type() {
         Parking parking = new Parking("Parking 1", new Adresse(), 1,2,3,4,5);
-        Assertions.assertEquals(1, parking.searchPlaceLibre(TypePlace.NORMALE).size());
-        Assertions.assertEquals(2, parking.searchPlaceLibre(TypePlace.HANDICAPE).size());
-        Assertions.assertEquals(3, parking.searchPlaceLibre(TypePlace.LONG).size());
-        Assertions.assertEquals(4, parking.searchPlaceLibre(TypePlace.DEUX_ROUES).size());
-        Assertions.assertEquals(5, parking.searchPlaceLibre(TypePlace.ELECTRIQUE).size());
+        Assertions.assertEquals(1, parking.searchPlaceLibre(TypeCar.NORMALE).size());
+        Assertions.assertEquals(2, parking.searchPlaceLibre(TypeCar.HANDICAPE).size());
+        Assertions.assertEquals(3, parking.searchPlaceLibre(TypeCar.LONG).size());
+        Assertions.assertEquals(4, parking.searchPlaceLibre(TypeCar.DEUX_ROUES).size());
+        Assertions.assertEquals(5, parking.searchPlaceLibre(TypeCar.ELECTRIQUE).size());
     }
 
     @Test
     public void should_return_list_of_place_of_type() {
         Parking parking = new Parking("Parking 1", new Adresse(), 1,2,3,4,5);
-        Assertions.assertEquals(1,parking.searchPlaceLibre(TypePlace.NORMALE).size());
-        Assertions.assertEquals(2, parking.searchPlaceLibre(TypePlace.HANDICAPE).size());
-        Assertions.assertEquals(3, parking.searchPlaceLibre(TypePlace.LONG).size());
-        Assertions.assertEquals(4, parking.searchPlaceLibre(TypePlace.DEUX_ROUES).size());
-        Assertions.assertEquals(5, parking.searchPlaceLibre(TypePlace.ELECTRIQUE).size());
+        Assertions.assertEquals(1,parking.searchPlaceLibre(TypeCar.NORMALE).size());
+        Assertions.assertEquals(2, parking.searchPlaceLibre(TypeCar.HANDICAPE).size());
+        Assertions.assertEquals(3, parking.searchPlaceLibre(TypeCar.LONG).size());
+        Assertions.assertEquals(4, parking.searchPlaceLibre(TypeCar.DEUX_ROUES).size());
+        Assertions.assertEquals(5, parking.searchPlaceLibre(TypeCar.ELECTRIQUE).size());
         try{
             parking.occuperPlace(1);
-            Assertions.assertEquals(0,parking.searchPlaceLibre(TypePlace.NORMALE).size());
+            Assertions.assertEquals(0,parking.searchPlaceLibre(TypeCar.NORMALE).size());
             parking.occuperPlace(4);
-            Assertions.assertEquals(2, parking.searchPlaceLibre(TypePlace.LONG).size());
+            Assertions.assertEquals(2, parking.searchPlaceLibre(TypeCar.LONG).size());
         } catch (PlaceNotFoundException e) {
             Assertions.fail();
         }
