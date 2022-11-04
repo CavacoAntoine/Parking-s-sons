@@ -28,6 +28,39 @@ public class Parking {
         this("EMPTY", new Adresse(), 0,0,0,0,0);
     }
 
+    public Adresse getAdresse() {
+        return adresse;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public List<Place> getPlaces() {
+        return places;
+
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public void setPlaces(List<Place> places) {
+        this.places = places;
+    }
+
+    public void setAdresse(Adresse adresse) {
+        this.adresse = adresse;
+    }
+
     /**
      * Initie un parking avec le nombres de place par type d�finis par les param�tres.
      * Toutes les places se voient affect�e un num�ro unique et tous les num�ros se suivent
@@ -116,23 +149,6 @@ public class Parking {
             }
         }
         throw new PlaceNotFoundException(numero);
-    }
-
-    public Adresse getAdresse() {
-        return adresse;
-    }
-
-    public String getNom() {
-        return nom;
-    }
-
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
-
-    public List<Place> getPlaces() {
-        return places;
-
     }
 
     @Override

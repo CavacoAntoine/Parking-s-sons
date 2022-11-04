@@ -16,4 +16,8 @@ public interface ParkingRepository extends JpaRepository<Parking, Long> {
             where p.adresse.numero = :numero and p.adresse.rue = :rue and p.adresse.ville = :ville and p.adresse.codePostal = :codePostal""")
     boolean existsByAdresse(@Param("numero") int numero, @Param("rue") String rue, @Param("ville") String ville, @Param("codePostal") int codePostal);
 
+
+
+
+
 }

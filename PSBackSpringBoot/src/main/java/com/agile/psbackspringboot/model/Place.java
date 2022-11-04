@@ -1,11 +1,13 @@
 package com.agile.psbackspringboot.model;
 
 import com.agile.psbackspringboot.enums.TypeCar;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Place {

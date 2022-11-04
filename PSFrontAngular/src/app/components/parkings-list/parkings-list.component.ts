@@ -22,7 +22,7 @@ export class ParkingsListComponent implements OnInit {
     });
 
     this.parkingService.getParkingsComplets().subscribe(parkings => {
-      this.listParkingsLibres = parkings;
+      this.listParkingsComplets = parkings;
     });
   }
 

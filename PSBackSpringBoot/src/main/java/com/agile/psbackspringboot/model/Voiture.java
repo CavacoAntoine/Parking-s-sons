@@ -17,4 +17,27 @@ public class Voiture {
     @ManyToOne
     Personne proprietaire;
 
+    public String getPlaque() {
+        return plaque;
+    }
+
+    public void setPlaque(String plaque) {
+        this.plaque = plaque;
+    }
+
+    public TypeCar getType() {
+        return type;
+    }
+
+    public void setType(TypeCar type) {
+        this.type = type;
+    }
+
+    public Personne getProprietaire() {
+        return proprietaire;
+    }
+
+    public void setProprietaire(Personne proprietaire) {
+        this.proprietaire = proprietaire;
+    }
 }

@@ -18,6 +18,11 @@ export class ParkingService {
 
   constructor(private http: HttpClient) { }
 
+  getParking(id: string) : Observable<Parking> {
+    const url = `${this.parkingUrl}/${id}`;
+    return this.http.get<Parking>(url);
+  }
+
   getAllParkings(): Observable<Array<Parking>>{
     return this.http.get<Array<Parking>>(this.parkingUrl).pipe(
       tap(),

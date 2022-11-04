@@ -47,6 +47,11 @@ public class ParkingRESTController {
                 parking.getPlaces().stream().filter(Place::isLibre).toList().size() == 0).sorted(new ParkingSortByName()).toList();
     }
 
+    @GetMapping("/{id}")
+    public Parking getParkingById(@PathVariable("id") long id) {
+        return this.parkingRepository.findById(id);
+    }
+
     @GetMapping("/{id}/placelibre")
     public List<Place> getAllPlaceLibre(@PathVariable("id") long id) {
         Parking parking = this.parkingRepository.findById(id);

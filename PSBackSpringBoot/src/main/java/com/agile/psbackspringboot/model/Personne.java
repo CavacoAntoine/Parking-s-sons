@@ -18,6 +18,14 @@ public class Personne {
     @ManyToOne
     private Adresse adresse;
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getEmail() {
         return email;
     }
@@ -48,5 +56,13 @@ public class Personne {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    public Adresse getAdresse() {
+        return adresse;
+    }
+
+    public void setAdresse(Adresse adresse) {
+        this.adresse = adresse;
     }
 }
