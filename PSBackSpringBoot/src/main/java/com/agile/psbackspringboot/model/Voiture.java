@@ -17,6 +17,16 @@ public class Voiture {
     @ManyToOne
     Personne proprietaire;
 
+    Voiture(){
+
+    }
+
+    Voiture(String plaque, TypeCar type, Personne proprietaire){
+        this.plaque = plaque;
+        this.type = type;
+        this.proprietaire = proprietaire;
+    }
+
     public String getPlaque() {
         return plaque;
     }

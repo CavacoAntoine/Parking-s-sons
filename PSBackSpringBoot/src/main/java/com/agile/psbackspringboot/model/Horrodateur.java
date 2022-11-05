@@ -91,4 +91,11 @@ public class Horrodateur {
     public void setMalGare(boolean malGare) {
         this.malGare = malGare;
     }
+
+    public boolean isBad(){
+        if(isMalGare() || isDureeDepasse()){
+            return true;
+        }
+        return false;
+    }
 }

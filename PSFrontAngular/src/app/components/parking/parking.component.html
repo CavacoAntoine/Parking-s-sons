@@ -15,13 +15,17 @@
 <!-- Parking start -->
 <div class="container-fluid py-5">
   <div class="container">
-    <div class="row gx-0">
+    <div class="mx-auto text-center wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+      <div class="d-inline-block border rounded-pill text-primary px-4 mb-3">Parking</div>
+      <h2 class="mb-3">Places libres</h2>
+    </div>
+    <div class="row gx-0 mb-4">
       <div class="col-lg-2-5 wow fadeIn" data-wow-delay="0.3s">
         <div class="bg-white shadow d-flex align-items-center h-100 px-5" style="min-height: 160px;">
           <div class="d-flex">
             <div class="ps-3">
               <h4>{{nbrPlaceNormale}}</h4>
-              <span>Places normales libres</span>
+              <span>Places normales</span>
             </div>
           </div>
         </div>
@@ -31,7 +35,7 @@
           <div class="d-flex">
             <div class="ps-3">
               <h4>{{nbrPlaceHandi}}</h4>
-              <span>Places handicapées libres</span>
+              <span>Places handicapées</span>
             </div>
           </div>
         </div>
@@ -41,7 +45,7 @@
           <div class="d-flex">
             <div class="ps-3">
               <h4>{{nbrPlaceDeuxR}}</h4>
-              <span>Places deux roues libres</span>
+              <span>Places deux roues</span>
             </div>
           </div>
         </div>
@@ -51,7 +55,7 @@
           <div class="d-flex">
             <div class="ps-3">
               <h4>{{nbrPlacePL}}</h4>
-              <span>Places poids lourds libres</span>
+              <span>Places poids lourds</span>
             </div>
           </div>
         </div>
@@ -61,7 +65,41 @@
           <div class="d-flex">
             <div class="ps-3">
               <h4>{{nbrPlaceElec}}</h4>
-              <span>Places vehicules electriques libres</span>
+              <span>Places vehicules electriques</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mx-auto text-center wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+      <h2 class="mb-5">Places problématiques</h2>
+    </div>
+
+    <div class="tab-content">
+      <div id="tab-1" class="tab-pane fade show p-0 active">
+        <div class="mx-auto text-center wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+          <h6 *ngIf="problematiques.length == 0">Aucun problème détecté sur ce parking</h6>
+        </div>
+        <div *ngFor="let horrodateur of problematiques">
+          <div class="job-item p-4 mb-4">
+            <div class="row g-4">
+              <div class="col-sm-12 col-md-8 d-flex align-items-center">
+                <div class="text-start ps-4">
+                  <h5 class="mb-3">Place n°{{horrodateur.place.numero}}</h5>
+                  <span class="text-truncate me-3">Type : {{horrodateur.place.type}}</span>
+                  <span class="text-truncate me-3">Voiture : {{horrodateur.voiture.plaque}} </span>
+                  <span class="text-truncate me-3">Arrivée : {{horrodateur.dateArrivee.toString()}} </span>
+                  <span class="text-truncate me-3">Départ : {{horrodateur.dateDepart.toString()}} </span>
+                  <span *ngIf="horrodateur.dureeDepasse" class="text-truncate me-3">Temps dépassé de : {{depassement(horrodateur).toString()}} </span>
+                  <span *ngIf="horrodateur.malGare" class="text-truncate me-3">Mauvaise place : {{horrodateur.voiture.type}} </span>
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
+                <div class="d-flex mb-3">
+                  <a class="btn btn-primary" [routerLink]="['/place',horrodateur.place.id]">En savoir plus</a>
+                </div>
+              </div>
             </div>
           </div>
         </div>

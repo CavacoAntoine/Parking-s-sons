@@ -3,6 +3,9 @@ import {ActivatedRoute} from "@angular/router";
 import {Parking} from "../../models/parking/parking";
 import {ParkingService} from "../../services/parking/parking.service";
 import {TypeCar} from "../../models/type-car";
+import {Place} from "../../models/place/place";
+import {Horrodateur} from "../../models/horrodateur/horrodateur";
+import {HorrodateurService} from "../../services/horrodateur/horrodateur.service";
 
 @Component({
   selector: 'app-parking',
@@ -17,10 +20,12 @@ export class ParkingComponent implements OnInit {
   nbrPlaceDeuxR = 0;
   nbrPlacePL = 0;
   nbrPlaceElec = 0;
+  problematiques: Array<Horrodateur>;
 
 
-  constructor(private activatedRoute : ActivatedRoute, private parkingService: ParkingService) {
+  constructor(private activatedRoute : ActivatedRoute, private parkingService: ParkingService, private horrodateurService: HorrodateurService) {
     this.parking = new Parking();
+    this.problematiques = new Array<Horrodateur>();
   }
 
   ngOnInit(): void {
@@ -45,6 +50,19 @@ export class ParkingComponent implements OnInit {
           }).length;
         });
 
+      this.horrodateurService.getBadHorrodateurFromParkingId(<string>params.get('id')).subscribe(
+        horrodateurs => {
+          this.problematiques = horrodateurs;
+        }
+      );
     });
   }
+
+  depassement(horrodateur : Horrodateur): Date  {
+    let date = new Date();
+    let diff = date.getTime() - horrodateur.dateDepart.getTime();
+    date = new Date(diff);
+    return date;
+  }
+
 }
