@@ -9,6 +9,7 @@ import { ParkingsListComponent } from './components/parkings-list/parkings-list.
 import { ParkingCreateComponent } from './components/parking-create/parking-create.component';
 import { HomeComponent } from './components/home/home.component';
 import {AppRoutingModule} from "./app-routing.module";
+import { ProblemesComponent } from './components/problemes/problemes.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import {AppRoutingModule} from "./app-routing.module";
     ParkingComponent,
     ParkingsListComponent,
     ParkingCreateComponent,
-    HomeComponent
+    HomeComponent,
+    ProblemesComponent
   ],
   imports: [
     BrowserModule,

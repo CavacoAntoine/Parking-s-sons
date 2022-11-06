@@ -89,9 +89,9 @@
                   <h5 class="mb-3">Place n°{{horrodateur.place.numero}}</h5>
                   <span class="text-truncate me-3">Type : {{horrodateur.place.type}}</span>
                   <span class="text-truncate me-3">Voiture : {{horrodateur.voiture.plaque}} </span>
-                  <span class="text-truncate me-3">Arrivée : {{horrodateur.dateArrivee.toString()}} </span>
-                  <span class="text-truncate me-3">Départ : {{horrodateur.dateDepart.toString()}} </span>
-                  <span *ngIf="horrodateur.dureeDepasse" class="text-truncate me-3">Temps dépassé de : {{depassement(horrodateur).toString()}} </span>
+                  <span class="text-truncate me-3">Arrivée : {{horrodateur.dateArrivee.toLocaleDateString()}} {{horrodateur.dateArrivee.toLocaleTimeString()}} </span>
+                  <span class="text-truncate me-3">Départ : {{horrodateur.dateDepart.toLocaleDateString()}} {{horrodateur.dateDepart.toLocaleTimeString()}} </span>
+                  <span *ngIf="horrodateur.dureeDepasse" class="text-truncate me-3">Temps dépassé de : {{depassement(horrodateur).getHours()}}:{{depassement(horrodateur).getMinutes()}}:{{depassement(horrodateur).getSeconds()}} </span>
                   <span *ngIf="horrodateur.malGare" class="text-truncate me-3">Mauvaise place : {{horrodateur.voiture.type}} </span>
                 </div>
               </div>

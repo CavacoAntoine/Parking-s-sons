@@ -1,0 +1,58 @@
+<!-- Header End -->
+<div class="container-xxl py-5 page-header mb-3 mt-5">
+  <div class="container my-5 pt-5 pb-4">
+    <h1 class="display-3 text-white mb-3 animated slideInDown">Liste des problèmes</h1>
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb text-uppercase">
+        <li class="breadcrumb-item"><a href="">Home</a></li>
+        <li class="breadcrumb-item text-white active" aria-current="page">Problèmes</li>
+      </ol>
+    </nav>
+  </div>
+</div>
+<!-- Header End -->
+
+<!-- Problèmes start -->
+<div class="container-fluid py-5">
+  <div class="container">
+    <div class="mx-auto text-center wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+      <div class="d-inline-block border rounded-pill text-primary px-4 mb-3">Problèmes</div>
+      <h2 class="mb-4">Places problématiques</h2>
+    </div>
+
+    <div class="tab-content">
+      <div class="tab-pane fade show p-0 active">
+        <div *ngFor="let parking of keys">
+          <div class="mx-auto text-center wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+            <h6 >{{parking}}</h6>
+          </div>
+          <div *ngFor="let horrodateur of problemes.get(parking)">
+            <div class="job-item p-4 mb-4">
+              <div class="row g-4">
+                <div class="col-sm-12 col-md-8 d-flex align-items-center">
+                  <div class="text-start ps-4">
+                    <h5 class="mb-3">Place n°{{horrodateur.place.numero}}</h5>
+                    <span class="text-truncate me-3">Type : {{horrodateur.place.type}}</span>
+                    <span class="text-truncate me-3">Voiture : {{horrodateur.voiture.plaque}} </span>
+                    <span class="text-truncate me-3">Arrivée : {{horrodateur.dateArrivee.toLocaleDateString()}} {{horrodateur.dateArrivee.toLocaleTimeString()}} </span>
+                    <span class="text-truncate me-3">Départ : {{horrodateur.dateDepart.toLocaleDateString()}} {{horrodateur.dateDepart.toLocaleTimeString()}} </span>
+                    <span *ngIf="horrodateur.dureeDepasse" class="text-truncate me-3">Temps dépassé de : {{depassement(horrodateur).getHours()}}:{{depassement(horrodateur).getMinutes()}}:{{depassement(horrodateur).getSeconds()}} </span>
+                    <span *ngIf="horrodateur.malGare" class="text-truncate me-3">Mauvaise place : {{horrodateur.voiture.type}} </span>
+                  </div>
+                </div>
+                <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
+                  <div class="d-flex mb-3">
+                    <a class="btn btn-primary" [routerLink]="['/place',horrodateur.place.id]">En savoir plus</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Parking end -->
+
+

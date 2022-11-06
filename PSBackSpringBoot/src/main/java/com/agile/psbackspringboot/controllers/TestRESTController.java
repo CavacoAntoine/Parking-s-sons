@@ -4,6 +4,7 @@ import com.agile.psbackspringboot.message.ResponseMessage;
 import com.agile.psbackspringboot.model.Horrodateur;
 import com.agile.psbackspringboot.model.Place;
 import com.agile.psbackspringboot.model.Voiture;
+import com.agile.psbackspringboot.repository.HorrodateurRepository;
 import com.agile.psbackspringboot.repository.PlaceRepository;
 import com.agile.psbackspringboot.repository.VoitureRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
@@ -23,52 +25,84 @@ public class TestRESTController {
 
     VoitureRepository voitureRepository;
     PlaceRepository placeRepository;
+    HorrodateurRepository horrodateurRepository;
 
     @Autowired
-    public TestRESTController(VoitureRepository voitureRepository,PlaceRepository placeRepository){
+    public TestRESTController(VoitureRepository voitureRepository, PlaceRepository placeRepository, HorrodateurRepository horrodateurRepository) {
         this.voitureRepository = voitureRepository;
         this.placeRepository = placeRepository;
+        this.horrodateurRepository = horrodateurRepository;
     }
 
-    @PostMapping()
-    public ResponseEntity<?> test(){
-        Random rand = new Random();
-        boolean malGare = false;
-        boolean dureeDepasse = false;
-        
-        Calendar arrivé = Calendar.getInstance();
-        arrivé.set(2022,Calendar.DECEMBER,6,rand.nextInt(15)+6,rand.nextInt(60));
-        
-        Calendar depart = arrivé;
-        Calendar test = arrivé;
+    @PostMapping("/{number}")
+    public ResponseEntity<?> test(@PathVariable("number") int nombre){
+        List<Voiture> voitures = voitureRepository.findAll();
+        List<Place> places = placeRepository.findAll();
 
-        depart.add(Calendar.HOUR,rand.nextInt(12)+1);
-        test.add(Calendar.HOUR,rand.nextInt(12)+1);
-        if(depart.before(test)){
-            dureeDepasse = true;
+        if(nombre >= voitures.size() && nombre >= places.size()) {
+            return new ResponseEntity<>(new ResponseMessage("Le nombre demandé doit être inférieur au nombre de " +
+                    "voitures et de " + "places dans la bdd soit <" + voitures.size() + " && <" + places.size()),
+                    HttpStatus.BAD_REQUEST);
         }
 
-        if(rand.nextInt(100) < 5){
-            malGare = true;
-        }
-        Horrodateur horrodateur = new Horrodateur(getARandomVoiture(),getARandomPlace(),arrivé,depart,dureeDepasse, malGare);
+        Random randomV = new Random();
+        Random randomP = new Random();
+        Random randomB = new Random();
+        Random randomH = new Random();
+        Random randomM = new Random();
 
+
+        for(int i = 0 ; i < nombre; i++) {
+            boolean malGare = false;
+            boolean dureeDepasse = false;
+            Voiture voiture =  new Voiture();
+            Place place = new Place();
+
+            boolean find = false;
+
+            while(!find) {
+                voiture = getARandomVoiture(randomV, voitures);
+                if(horrodateurRepository.findByVoiture(voiture) == null)
+                    find = true;
+            }
+
+            find = false;
+
+            while(!find) {
+                place = getARandomPlace(randomP, places);
+                if(horrodateurRepository.findByPlace(place) == null)
+                    find = true;
+            }
+
+
+
+            if(randomB.nextInt(100) < 5)
+                malGare = true;
+
+            Calendar arrive = Calendar.getInstance();
+            arrive.add(Calendar.HOUR_OF_DAY, -randomH.nextInt(23));
+            arrive.add(Calendar.MINUTE, -randomM.nextInt(60));
+
+            Calendar depart = (Calendar) arrive.clone();
+            depart.add(Calendar.HOUR_OF_DAY, randomH.nextInt(72));
+            depart.add(Calendar.MINUTE, randomM.nextInt(60));
+
+            if(depart.compareTo(Calendar.getInstance()) < 0 ) {
+                dureeDepasse = true;
+            }
+
+            horrodateurRepository.save(new Horrodateur(voiture, place, new Date(arrive.getTime().getTime()), depart.getTime(), dureeDepasse, malGare));
+        }
 
         return new ResponseEntity<>(new ResponseMessage("simulation faite"), HttpStatus.CREATED);
     }
 
-    public Voiture getARandomVoiture(){
-        List<Voiture> listV = voitureRepository.findAll();
-        Random rand = new Random();
-        return listV.get(rand.nextInt(listV.size()));
+    public Voiture getARandomVoiture(Random random, List<Voiture> voitures){
+        return voitures.get(random.nextInt(voitures.size()));
     }
 
-    public Place getARandomPlace(){
-        List<Place> listV = placeRepository.findAll();
-        Random rand = new Random();
-        return listV.get(rand.nextInt(listV.size()));
+    public Place getARandomPlace(Random random, List<Place> places){
+        return places.get(random.nextInt(places.size()));
     }
-
-
 
 }

@@ -5,8 +5,10 @@ import com.agile.psbackspringboot.comparator.PlaceSortByType;
 import com.agile.psbackspringboot.creator.ParkingFactory;
 import com.agile.psbackspringboot.enums.TypeCar;
 import com.agile.psbackspringboot.message.ResponseMessage;
+import com.agile.psbackspringboot.model.Horrodateur;
 import com.agile.psbackspringboot.model.Parking;
 import com.agile.psbackspringboot.model.Place;
+import com.agile.psbackspringboot.repository.HorrodateurRepository;
 import com.agile.psbackspringboot.repository.ParkingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,10 +24,12 @@ import java.util.List;
 public class ParkingRESTController {
 
     ParkingRepository parkingRepository;
+    HorrodateurRepository horrodateurRepository;
 
     @Autowired
-    public ParkingRESTController(ParkingRepository parkingRepository) {
+    public ParkingRESTController(ParkingRepository parkingRepository, HorrodateurRepository horrodateurRepository) {
         this.parkingRepository = parkingRepository;
+        this.horrodateurRepository = horrodateurRepository;
     }
 
     @GetMapping
@@ -33,6 +37,24 @@ public class ParkingRESTController {
         List<Parking> parkings = this.parkingRepository.findAll();
         parkings.sort(new ParkingSortByName());
         return parkings;
+    }
+
+    @GetMapping("/bad")
+    public List<Parking> getAllBadParkings() {
+        List<Parking> parkings = this.parkingRepository.findAll();
+        List<Parking> badParkings = new ArrayList<>();
+        for(Parking parking : parkings) {
+            List<Place> places = parking.getPlaces();
+            for (Place place:places) {
+                Horrodateur horrodateur = horrodateurRepository.findByPlace(place);
+                if(horrodateur != null && horrodateur.isBad()){
+                    badParkings.add(parking);
+                    break;
+                }
+            }
+        }
+        badParkings.sort(new ParkingSortByName());
+        return badParkings;
     }
 
     @GetMapping("/libres")

@@ -17,11 +17,10 @@ public class Voiture {
     @ManyToOne
     Personne proprietaire;
 
-    Voiture(){
-
+    public Voiture(){
     }
 
-    Voiture(String plaque, TypeCar type, Personne proprietaire){
+    public Voiture(String plaque, TypeCar type, Personne proprietaire){
         this.plaque = plaque;
         this.type = type;
         this.proprietaire = proprietaire;

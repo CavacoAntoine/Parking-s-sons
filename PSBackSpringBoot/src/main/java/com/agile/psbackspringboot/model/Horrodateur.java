@@ -2,6 +2,7 @@ package com.agile.psbackspringboot.model;
 
 import javax.persistence.*;
 import java.util.Calendar;
+import java.util.Date;
 
 @Entity
 public class Horrodateur {
@@ -16,9 +17,9 @@ public class Horrodateur {
     @OneToOne
     private Place place;
 
-    private Calendar dateArrivee;
+    private Date dateArrivee;
 
-    private Calendar dateDepart;
+    private Date dateDepart;
 
     private boolean dureeDepasse;
 
@@ -27,7 +28,7 @@ public class Horrodateur {
     public Horrodateur() {
     }
 
-    public Horrodateur(Voiture voiture, Place place, Calendar hArrivee, Calendar dDepart, boolean dureeDepasse, boolean malGare) {
+    public Horrodateur(Voiture voiture, Place place, Date hArrivee, Date dDepart, boolean dureeDepasse, boolean malGare) {
         this.voiture = voiture;
         this.place = place;
         this.dateArrivee = hArrivee;
@@ -60,19 +61,19 @@ public class Horrodateur {
         this.place = place;
     }
 
-    public Calendar getDateArrivee() {
+    public Date getDateArrivee() {
         return dateArrivee;
     }
 
-    public void setDateArrivee(Calendar dateArrivee) {
+    public void setDateArrivee(Date dateArrivee) {
         this.dateArrivee = dateArrivee;
     }
 
-    public Calendar getDateDepart() {
+    public Date getDateDepart() {
         return dateDepart;
     }
 
-    public void setDateDepart(Calendar dateDepart) {
+    public void setDateDepart(Date dateDepart) {
         this.dateDepart = dateDepart;
     }
 

@@ -52,13 +52,17 @@ export class ParkingComponent implements OnInit {
 
       this.horrodateurService.getBadHorrodateurFromParkingId(<string>params.get('id')).subscribe(
         horrodateurs => {
+          horrodateurs.forEach(horrodateur => {
+            horrodateur.dateDepart = new Date(horrodateur.dateDepart);
+            horrodateur.dateArrivee = new Date(horrodateur.dateArrivee);
+          });
           this.problematiques = horrodateurs;
         }
       );
     });
   }
 
-  depassement(horrodateur : Horrodateur): Date  {
+  depassement(horrodateur: Horrodateur): Date {
     let date = new Date();
     let diff = date.getTime() - horrodateur.dateDepart.getTime();
     date = new Date(diff);

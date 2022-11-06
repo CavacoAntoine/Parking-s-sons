@@ -29,6 +29,14 @@ export class ParkingService {
     );
   }
 
+  getAllBadParkings(): Observable<Array<Parking>>{
+    const url = `${this.parkingUrl}/bad`;
+    return this.http.get<Array<Parking>>(url).pipe(
+      tap(),
+      catchError(this.handleError<Array<Parking>>(`getAllBadParking `))
+    );
+  }
+
   getParkingsLibres(): Observable<Array<Parking>>{
     const url = `${this.parkingUrl}/libres`;
     return this.http.get<Array<Parking>>(url).pipe(
