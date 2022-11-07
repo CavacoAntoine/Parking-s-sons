@@ -24,7 +24,7 @@
       <div class="tab-pane fade show p-0 active">
         <div *ngFor="let parking of keys">
           <div class="mx-auto text-center wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
-            <h6 >{{parking}}</h6>
+            <h5 >{{parking}}</h5>
           </div>
           <div *ngFor="let horrodateur of problemes.get(parking)">
             <div class="job-item p-4 mb-4">
@@ -32,12 +32,12 @@
                 <div class="col-sm-12 col-md-8 d-flex align-items-center">
                   <div class="text-start ps-4">
                     <h5 class="mb-3">Place n°{{horrodateur.place.numero}}</h5>
-                    <span class="text-truncate me-3">Type : {{horrodateur.place.type}}</span>
+                    <span class="text-truncate me-3">Type place : {{horrodateur.place.type}}</span>
                     <span class="text-truncate me-3">Voiture : {{horrodateur.voiture.plaque}} </span>
                     <span class="text-truncate me-3">Arrivée : {{horrodateur.dateArrivee.toLocaleDateString()}} {{horrodateur.dateArrivee.toLocaleTimeString()}} </span>
                     <span class="text-truncate me-3">Départ : {{horrodateur.dateDepart.toLocaleDateString()}} {{horrodateur.dateDepart.toLocaleTimeString()}} </span>
                     <span *ngIf="horrodateur.dureeDepasse" class="text-truncate me-3">Temps dépassé de : {{depassement(horrodateur).getHours()}}:{{depassement(horrodateur).getMinutes()}}:{{depassement(horrodateur).getSeconds()}} </span>
-                    <span *ngIf="horrodateur.malGare" class="text-truncate me-3">Mauvaise place : {{horrodateur.voiture.type}} </span>
+                    <span *ngIf="horrodateur.malGare" class="text-truncate me-3">Mauvaise place (type voiture) : {{horrodateur.voiture.type}} </span>
                   </div>
                 </div>
                 <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">

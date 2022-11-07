@@ -1,5 +1,6 @@
 package com.agile.psbackspringboot.controllers;
 
+import com.agile.psbackspringboot.enums.TypeCar;
 import com.agile.psbackspringboot.message.ResponseMessage;
 import com.agile.psbackspringboot.model.Horrodateur;
 import com.agile.psbackspringboot.model.Place;
@@ -78,8 +79,15 @@ public class TestRESTController {
 
 
 
-            if(randomB.nextInt(100) < 5)
-                malGare = true;
+            if(place.getType() != voiture.getType()){
+                if(voiture.getType() == TypeCar.ELECTRIQUE && place.getType() == TypeCar.NORMALE)
+                    malGare = false;
+                else if(voiture.getType() == TypeCar.HANDICAPE && place.getType() == TypeCar.NORMALE)
+                    malGare = false;
+                else
+                    malGare = true;
+            }
+
 
             Calendar arrive = Calendar.getInstance();
             arrive.add(Calendar.HOUR_OF_DAY, -randomH.nextInt(23));
