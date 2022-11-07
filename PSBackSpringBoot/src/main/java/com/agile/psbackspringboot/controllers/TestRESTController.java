@@ -45,6 +45,8 @@ public class TestRESTController {
                     HttpStatus.BAD_REQUEST);
         }
 
+        this.horrodateurRepository.deleteAll();
+
         Random randomV = new Random();
         Random randomP = new Random();
         Random randomB = new Random();

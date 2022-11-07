@@ -32,7 +32,7 @@ public class HorrodateurRESTController {
     }
 
     @GetMapping("/bad/{id}")
-    public List<Horrodateur> getAllBadPlace(@PathVariable("id") long idParking){
+    public List<Horrodateur> getAllBadHorrodateur(@PathVariable("id") long idParking){
         List<Place> places = parkingRepository.findById(idParking).getPlaces();
         List<Horrodateur> badHorrodateurs = new ArrayList<>();
         for (Place place:places) {

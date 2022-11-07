@@ -96,6 +96,9 @@ public class Horrodateur {
     public boolean isBad(){
         if(isMalGare() || isDureeDepasse()){
             return true;
+        } else if (this.dateDepart.compareTo(new Date()) < 0) {
+            this.dureeDepasse = true;
+            return true;
         }
         return false;
     }
