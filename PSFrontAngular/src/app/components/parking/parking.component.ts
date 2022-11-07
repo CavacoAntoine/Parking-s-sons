@@ -3,7 +3,6 @@ import {ActivatedRoute} from "@angular/router";
 import {Parking} from "../../models/parking/parking";
 import {ParkingService} from "../../services/parking/parking.service";
 import {TypeCar} from "../../models/type-car";
-import {Place} from "../../models/place/place";
 import {Horrodateur} from "../../models/horrodateur/horrodateur";
 import {HorrodateurService} from "../../services/horrodateur/horrodateur.service";
 

@@ -46,14 +46,14 @@ public class TestRESTController {
                     HttpStatus.BAD_REQUEST);
         }
 
+        places.forEach(place -> place.setLibre(true));
+        this.placeRepository.saveAll(places);
         this.horrodateurRepository.deleteAll();
 
         Random randomV = new Random();
         Random randomP = new Random();
-        Random randomB = new Random();
         Random randomH = new Random();
         Random randomM = new Random();
-
 
         for(int i = 0 ; i < nombre; i++) {
             boolean malGare = false;
@@ -77,8 +77,6 @@ public class TestRESTController {
                     find = true;
             }
 
-
-
             if(place.getType() != voiture.getType()){
                 if(voiture.getType() == TypeCar.ELECTRIQUE && place.getType() == TypeCar.NORMALE)
                     malGare = false;
@@ -87,7 +85,6 @@ public class TestRESTController {
                 else
                     malGare = true;
             }
-
 
             Calendar arrive = Calendar.getInstance();
             arrive.add(Calendar.HOUR_OF_DAY, -randomH.nextInt(23));
@@ -101,6 +98,8 @@ public class TestRESTController {
                 dureeDepasse = true;
             }
 
+            place.setLibre(false);
+            placeRepository.save(place);
             horrodateurRepository.save(new Horrodateur(voiture, place, new Date(arrive.getTime().getTime()), depart.getTime(), dureeDepasse, malGare));
         }
 
