@@ -36,13 +36,13 @@
                     <span class="text-truncate me-3">Voiture : {{horodateur.voiture.plaque}} </span>
                     <span class="text-truncate me-3">Arrivée : {{horodateur.dateArrivee.toLocaleDateString()}} {{horodateur.dateArrivee.toLocaleTimeString()}} </span>
                     <span class="text-truncate me-3">Départ : {{horodateur.dateDepart.toLocaleDateString()}} {{horodateur.dateDepart.toLocaleTimeString()}} </span>
-                    <span *ngIf="horodateur.dureeDepasse" class="text-truncate me-3">Temps dépassé de : {{depassement(horodateur).getHours()}}:{{depassement(horodateur).getMinutes()}}:{{depassement(horodateur).getSeconds()}} </span>
+                    <span *ngIf="horodateur.dureeDepasse" class="text-truncate me-3">Temps dépassé de : {{tpsDepassee.get(horodateur.id)?.getHours()}}:{{tpsDepassee.get(horodateur.id)?.getMinutes()}}:{{tpsDepassee.get(horodateur.id)?.getSeconds()}} </span>
                     <span *ngIf="horodateur.malGare" class="text-truncate me-3">Mauvaise place (type voiture) : {{horodateur.voiture.type}} </span>
                   </div>
                 </div>
                 <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
                   <div class="d-flex mb-3">
-                    <a class="btn btn-primary" [routerLink]="['/place',horodateur.place.id]">En savoir plus</a>
+                    <a class="btn btn-primary" [routerLink]="['/horodateur',horodateur.id]">En savoir plus</a>
                   </div>
                 </div>
               </div>

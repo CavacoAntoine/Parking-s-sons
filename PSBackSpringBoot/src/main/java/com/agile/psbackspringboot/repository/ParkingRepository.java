@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 public interface ParkingRepository extends JpaRepository<Parking, Long> {
     Parking findById(long id);
     boolean existsByNom(String nom);
+    Parking findByPlaces_Id(long id);
 
     @Query("""
             select (count(p) > 0) from Parking p

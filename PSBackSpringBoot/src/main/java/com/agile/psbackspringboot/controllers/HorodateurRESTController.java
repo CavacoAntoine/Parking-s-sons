@@ -12,7 +12,7 @@ import java.util.*;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
-@RequestMapping("/horrodateur")
+@RequestMapping("/horodateur")
 public class HorodateurRESTController {
 
     HorodateurRepository horodateurRepository;
@@ -27,12 +27,12 @@ public class HorodateurRESTController {
     }
 
     @GetMapping("/{id}")
-    public Horodateur getHorrodateur(@PathVariable("id") long idPlace) {
-        return horodateurRepository.findByPlace(placeRepository.findById(idPlace));
+    public Horodateur getHorodateurById(@PathVariable("id") long id) {
+        return horodateurRepository.findById(id);
     }
 
     @GetMapping("/bad/{id}")
-    public List<Horodateur> getAllBadHorrodateur(@PathVariable("id") long idParking){
+    public List<Horodateur> getAllBadHorodateur(@PathVariable("id") long idParking){
         List<Place> places = parkingRepository.findById(idParking).getPlaces();
         List<Horodateur> badHorodateurs = new ArrayList<>();
         for (Place place:places) {

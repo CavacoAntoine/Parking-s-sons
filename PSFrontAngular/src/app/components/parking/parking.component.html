@@ -17,6 +17,7 @@
   <div class="container">
     <div class="mx-auto text-center wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
       <div class="d-inline-block border rounded-pill text-primary px-4 mb-3">Parking</div>
+      <p><i class="fa fa-map-marker-alt text-primary me-2"></i>{{parking.adresse.numero}} {{parking.adresse.rue}}, {{parking.adresse.codePostal}} {{parking.adresse.ville}}</p>
       <h2 class="mb-3">Places libres</h2>
     </div>
     <div class="row gx-0 mb-4">
@@ -91,13 +92,13 @@
                   <span class="text-truncate me-3">Voiture : {{horodateur.voiture.plaque}} </span>
                   <span class="text-truncate me-3">Arrivée : {{horodateur.dateArrivee.toLocaleDateString()}} {{horodateur.dateArrivee.toLocaleTimeString()}} </span>
                   <span class="text-truncate me-3">Départ : {{horodateur.dateDepart.toLocaleDateString()}} {{horodateur.dateDepart.toLocaleTimeString()}} </span>
-                  <span *ngIf="horodateur.dureeDepasse" class="text-truncate me-3">Temps dépassé de : {{depassement(horodateur).getHours()}}:{{depassement(horodateur).getMinutes()}}:{{depassement(horodateur).getSeconds()}} </span>
+                  <span *ngIf="horodateur.dureeDepasse" class="text-truncate me-3">Temps dépassé de : {{tpsDepassee.get(horodateur.id)?.getHours()}}:{{tpsDepassee.get(horodateur.id)?.getMinutes()}}:{{tpsDepassee.get(horodateur.id)?.getSeconds()}} </span>
                   <span *ngIf="horodateur.malGare" class="text-truncate me-3">Mauvaise place : {{horodateur.voiture.type}} </span>
                 </div>
               </div>
               <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
                 <div class="d-flex mb-3">
-                  <a class="btn btn-primary" [routerLink]="['/place',horodateur.place.id]">En savoir plus</a>
+                  <a class="btn btn-primary" [routerLink]="['/horodateur',horodateur.id]">En savoir plus</a>
                 </div>
               </div>
             </div>

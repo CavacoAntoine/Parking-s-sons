@@ -20,11 +20,13 @@ export class ParkingComponent implements OnInit {
   nbrPlacePL = 0;
   nbrPlaceElec = 0;
   problematiques: Array<Horodateur>;
+  tpsDepassee: Map<number, Date>;
 
 
   constructor(private activatedRoute : ActivatedRoute, private parkingService: ParkingService, private horodateurService: HorodateurService) {
     this.parking = new Parking();
     this.problematiques = new Array<Horodateur>();
+    this.tpsDepassee = new Map<number, Date>();
   }
 
   ngOnInit(): void {
@@ -54,6 +56,9 @@ export class ParkingComponent implements OnInit {
           horodateurs.forEach(horodateur => {
             horodateur.dateDepart = new Date(horodateur.dateDepart);
             horodateur.dateArrivee = new Date(horodateur.dateArrivee);
+            if(horodateur.dureeDepasse){
+              this.tpsDepassee.set(horodateur.id,this.depassement(horodateur));
+            }
           });
           this.problematiques = horodateurs;
         }

@@ -8,9 +8,14 @@ import {Horodateur} from "../../models/horodateur/horodateur";
 })
 export class HorodateurService {
 
-  private horodateurUrl = 'http://localhost:8080/horrodateur';
+  private horodateurUrl = 'http://localhost:8080/horodateur';
 
   constructor(private http: HttpClient) { }
+
+  getHorodateurById(id : string) : Observable<Horodateur> {
+    const url = `${this.horodateurUrl}/${id}`;
+    return this.http.get<Horodateur>(url);
+  }
 
   getBadHorodateurFromParkingId(id : string) : Observable<Array<Horodateur>> {
     const url = `${this.horodateurUrl}/bad/${id}`;

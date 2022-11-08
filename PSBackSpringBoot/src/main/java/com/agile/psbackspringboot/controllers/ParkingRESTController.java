@@ -74,6 +74,11 @@ public class ParkingRESTController {
         return this.parkingRepository.findById(id);
     }
 
+    @GetMapping("/place/{id}")
+    public Parking getParkingByPlaceId(@PathVariable("id") long id) {
+        return this.parkingRepository.findByPlaces_Id(id);
+    }
+
     @GetMapping("/{id}/placelibre")
     public List<Place> getAllPlaceLibre(@PathVariable("id") long id) {
         Parking parking = this.parkingRepository.findById(id);

@@ -22,6 +22,11 @@ export class ParkingService {
     return this.http.get<Parking>(url);
   }
 
+  getParkingByPlaceId(id: string) : Observable<Parking> {
+    const url = `${this.parkingUrl}/place/${id}`;
+    return this.http.get<Parking>(url);
+  }
+
   getAllParkings(): Observable<Array<Parking>>{
     return this.http.get<Array<Parking>>(this.parkingUrl).pipe(
       tap(),

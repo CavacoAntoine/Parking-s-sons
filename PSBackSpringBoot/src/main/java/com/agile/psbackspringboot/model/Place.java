@@ -34,6 +34,10 @@ public class Place {
         return this.id;
     }
 
+    public void setId(long id) {
+        this.id = id;
+    }
+
     public TypeCar getType() {
         return type;
     }

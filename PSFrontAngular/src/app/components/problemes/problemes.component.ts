@@ -13,10 +13,12 @@ export class ProblemesComponent implements OnInit {
   problemes: Map<string, Array<Horodateur>>;
   keys: Array<string>;
   wait = false;
+  tpsDepassee: Map<number, Date>;
 
   constructor(private parkingService: ParkingService, private horodateurService: HorodateurService) {
     this.problemes = new Map<string, Array<Horodateur>>();
     this.keys = new Array<string>();
+    this.tpsDepassee = new Map<number, Date>();
   }
 
   ngOnInit(): void {
@@ -27,9 +29,12 @@ export class ProblemesComponent implements OnInit {
             this.keys.push(parking.nom);
             this.horodateurService.getBadHorodateurFromParkingId(parking.id.toString()).subscribe(
               horodateurs => {
-                horodateurs.forEach(horrodateur => {
-                  horrodateur.dateDepart = new Date(horrodateur.dateDepart);
-                  horrodateur.dateArrivee = new Date(horrodateur.dateArrivee);
+                horodateurs.forEach(horodateur => {
+                  horodateur.dateDepart = new Date(horodateur.dateDepart);
+                  horodateur.dateArrivee = new Date(horodateur.dateArrivee);
+                  if(horodateur.dureeDepasse){
+                    this.tpsDepassee.set(horodateur.id,this.depassement(horodateur));
+                  }
                 });
                 this.problemes.set(parking.nom, horodateurs);
               }
