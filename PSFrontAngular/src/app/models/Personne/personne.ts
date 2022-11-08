@@ -9,4 +9,8 @@ export class Personne {
   age: number;
   adresse: Adresse;
 
+  constructor() {
+    this.adresse = new Adresse();
+  }
+
 }

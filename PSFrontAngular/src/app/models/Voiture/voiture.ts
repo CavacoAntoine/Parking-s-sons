@@ -7,4 +7,8 @@ export class Voiture {
   type: TypeCar;
   proprietaire: Personne;
 
+  constructor() {
+    this.proprietaire = new Personne();
+  }
+
 }

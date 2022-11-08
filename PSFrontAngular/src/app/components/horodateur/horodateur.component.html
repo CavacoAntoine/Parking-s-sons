@@ -11,3 +11,112 @@
   </div>
 </div>
 <!-- Header End -->
+
+<!-- Horodateur Detail Start -->
+<div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
+  <div class="container">
+    <div class="row gy-5 gx-4">
+      <div class="col-lg-8">
+        <div class="d-flex align-items-center mb-5">
+          <div class="text-start ps-4">
+            <h3 class="mb-3">Place n°{{horodateur.place.numero}}</h3>
+            <span class="text-truncate me-3">Place : {{horodateur.place.type}}</span>
+            <span class="text-truncate me-3">Arrivée : {{horodateur.dateArrivee.toLocaleDateString()}} {{horodateur.dateArrivee.toLocaleTimeString()}} </span>
+            <span class="text-truncate me-3">Départ : {{horodateur.dateDepart.toLocaleDateString()}} {{horodateur.dateDepart.toLocaleTimeString()}} </span>
+            <span *ngIf="horodateur.dureeDepasse" class="text-truncate me-3">Temps dépassé de : {{depassement(horodateur).getHours()}}:{{depassement(horodateur).getMinutes()}}:{{depassement(horodateur).getSeconds()}} </span>
+            <span *ngIf="horodateur.malGare" class="text-truncate me-3">Mauvaise place</span>
+          </div>
+        </div>
+
+        <div class="ps-4 mb-5">
+          <div class="row">
+            <div class="col-lg-7 wow fadeInUp" data-wow-delay="0.3s">
+              <form>
+                <div class="row g-3">
+                  <div class="col-12">
+                    <div class="form-floating">
+                      <h4>Vehicule</h4>
+                    </div>
+                  </div>
+                  <div class="col-2-5">
+                    <div class="form-floating">
+                      <input type="text" class="form-control" id="immatriculation" value="{{horodateur.voiture.plaque}}" disabled>
+                      <label for="immatriculation">Immatriculation</label>
+                    </div>
+                  </div>
+                  <div class="col-2-5">
+                    <div class="form-floating">
+                      <input type="text" class="form-control" id="type" value="{{horodateur.voiture.type}}" disabled>
+                      <label for="type">Type</label>
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <div class="form-floating">
+                      <h4>Propriétaire</h4>
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="form-floating">
+                      <input type="text" class="form-control" id="nom" value="{{horodateur.voiture.proprietaire.nom}}" disabled>
+                      <label for="nom">Nom</label>
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="form-floating">
+                      <input type="text" class="form-control" id="prenom" value="{{horodateur.voiture.proprietaire.prenom}}" disabled>
+                      <label for="prenom">Prénom</label>
+                    </div>
+                  </div>
+                  <div class="col-2">
+                    <div class="form-floating">
+                      <input type="number" class="form-control" id="age" value="{{horodateur.voiture.proprietaire.age}}" disabled>
+                      <label for="age">Age</label>
+                    </div>
+                  </div>
+                  <div class="col-10">
+                    <div class="form-floating">
+                      <input type="email" class="form-control" id="email" value="{{horodateur.voiture.proprietaire.email}}" disabled>
+                      <label for="email">Email</label>
+                    </div>
+                  </div>
+                  <div class="col-2">
+                    <div class="form-floating">
+                      <input type="number" class="form-control" id="numero" value="{{horodateur.voiture.proprietaire.adresse.numero}}" disabled>
+                      <label for="numero">Numéro</label>
+                    </div>
+                  </div>
+                  <div class="col-10">
+                    <div class="form-floating">
+                      <input type="text" class="form-control" id="rue" value="{{horodateur.voiture.proprietaire.adresse.rue}}" disabled>
+                      <label for="rue">Rue</label>
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <div class="form-floating">
+                      <input type="number" class="form-control" id="cp" value="{{horodateur.voiture.proprietaire.adresse.codePostal}}" disabled>
+                      <label for="cp">Code postal</label>
+                    </div>
+                  </div>
+                  <div class="col-8">
+                    <div class="form-floating">
+                      <input type="text" class="form-control" id="ville" value="{{horodateur.voiture.proprietaire.adresse.ville}}" disabled>
+                      <label for="ville">Ville</label>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4">
+        <div class=" rounded p-5 mb-4 wow slideInUp" data-wow-delay="0.1s">
+          <h4 class="mb-4">Adresse du parking</h4>
+          <p class="m-0"><i class="fa fa-map-marker-alt text-primary me-2"></i>{{parking.adresse.numero}} {{parking.adresse.rue}}, {{parking.adresse.codePostal}} {{parking.adresse.ville}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Horodateur Detail End -->

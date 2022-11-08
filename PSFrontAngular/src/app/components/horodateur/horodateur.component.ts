@@ -24,11 +24,20 @@ export class HorodateurComponent implements OnInit {
     this.activatedRoute.paramMap.subscribe(params =>{
       this.horodateurService.getHorodateurById(<string>params.get('id')).subscribe(horodateur => {
         this.horodateur = horodateur
+        horodateur.dateDepart = new Date(horodateur.dateDepart);
+        horodateur.dateArrivee = new Date(horodateur.dateArrivee);
         this.parkingService.getParkingByPlaceId(horodateur.place.id.toString()).subscribe( parking => this.parking = parking);
       });
 
 
     });
+  }
+
+  depassement(horodateur: Horodateur): Date {
+    let date = new Date();
+    let diff = date.getTime() - horodateur.dateDepart.getTime();
+    date = new Date(diff);
+    return date;
   }
 
 }
