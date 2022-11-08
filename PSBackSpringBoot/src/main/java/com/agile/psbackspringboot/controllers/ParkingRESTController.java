@@ -5,10 +5,10 @@ import com.agile.psbackspringboot.comparator.PlaceSortByType;
 import com.agile.psbackspringboot.creator.ParkingFactory;
 import com.agile.psbackspringboot.enums.TypeCar;
 import com.agile.psbackspringboot.message.ResponseMessage;
-import com.agile.psbackspringboot.model.Horrodateur;
+import com.agile.psbackspringboot.model.Horodateur;
 import com.agile.psbackspringboot.model.Parking;
 import com.agile.psbackspringboot.model.Place;
-import com.agile.psbackspringboot.repository.HorrodateurRepository;
+import com.agile.psbackspringboot.repository.HorodateurRepository;
 import com.agile.psbackspringboot.repository.ParkingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,12 +24,12 @@ import java.util.List;
 public class ParkingRESTController {
 
     ParkingRepository parkingRepository;
-    HorrodateurRepository horrodateurRepository;
+    HorodateurRepository horodateurRepository;
 
     @Autowired
-    public ParkingRESTController(ParkingRepository parkingRepository, HorrodateurRepository horrodateurRepository) {
+    public ParkingRESTController(ParkingRepository parkingRepository, HorodateurRepository horodateurRepository) {
         this.parkingRepository = parkingRepository;
-        this.horrodateurRepository = horrodateurRepository;
+        this.horodateurRepository = horodateurRepository;
     }
 
     @GetMapping
@@ -46,8 +46,8 @@ public class ParkingRESTController {
         for(Parking parking : parkings) {
             List<Place> places = parking.getPlaces();
             for (Place place:places) {
-                Horrodateur horrodateur = horrodateurRepository.findByPlace(place);
-                if(horrodateur != null && horrodateur.isBad()){
+                Horodateur horodateur = horodateurRepository.findByPlace(place);
+                if(horodateur != null && horodateur.isBad()){
                     badParkings.add(parking);
                     break;
                 }

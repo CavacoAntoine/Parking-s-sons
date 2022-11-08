@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { HorrodateurService } from './horrodateur.service';
+import { HorodateurService } from './horodateur.service';
 
 describe('HorrodateurService', () => {
-  let service: HorrodateurService;
+  let service: HorodateurService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(HorrodateurService);
+    service = TestBed.inject(HorodateurService);
   });
 
   it('should be created', () => {

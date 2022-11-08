@@ -27,7 +27,7 @@ export class ParkingsListComponent implements OnInit {
   }
 
   placeLibre(parking : Parking) : number {
-    return parking.places.filter(function (value,index, array) {
+    return parking.places.filter(function (value) {
       return value.libre;
     }).length;
   }

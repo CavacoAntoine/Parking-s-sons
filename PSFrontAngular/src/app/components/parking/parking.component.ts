@@ -3,8 +3,8 @@ import {ActivatedRoute} from "@angular/router";
 import {Parking} from "../../models/parking/parking";
 import {ParkingService} from "../../services/parking/parking.service";
 import {TypeCar} from "../../models/type-car";
-import {Horrodateur} from "../../models/horrodateur/horrodateur";
-import {HorrodateurService} from "../../services/horrodateur/horrodateur.service";
+import {Horodateur} from "../../models/horodateur/horodateur";
+import {HorodateurService} from "../../services/horodateur/horodateur.service";
 
 @Component({
   selector: 'app-parking',
@@ -19,12 +19,12 @@ export class ParkingComponent implements OnInit {
   nbrPlaceDeuxR = 0;
   nbrPlacePL = 0;
   nbrPlaceElec = 0;
-  problematiques: Array<Horrodateur>;
+  problematiques: Array<Horodateur>;
 
 
-  constructor(private activatedRoute : ActivatedRoute, private parkingService: ParkingService, private horrodateurService: HorrodateurService) {
+  constructor(private activatedRoute : ActivatedRoute, private parkingService: ParkingService, private horodateurService: HorodateurService) {
     this.parking = new Parking();
-    this.problematiques = new Array<Horrodateur>();
+    this.problematiques = new Array<Horodateur>();
   }
 
   ngOnInit(): void {
@@ -32,38 +32,38 @@ export class ParkingComponent implements OnInit {
       this.parkingService.getParking(<string>params.get('id')).subscribe(
         parking =>{
           this.parking = parking;
-          this.nbrPlaceNormale = this.parking.places.filter((value, index, array) => {
+          this.nbrPlaceNormale = this.parking.places.filter((value) => {
             return value.type == TypeCar.NORMALE && value.libre;
           }).length;
-          this.nbrPlaceHandi = parking.places.filter((value, index, array) => {
+          this.nbrPlaceHandi = parking.places.filter((value) => {
             return value.type == TypeCar.HANDICAPE && value.libre;
           }).length;
-          this.nbrPlaceDeuxR = parking.places.filter((value, index, array) => {
+          this.nbrPlaceDeuxR = parking.places.filter((value) => {
             return value.type == TypeCar.DEUX_ROUES && value.libre;
           }).length;
-          this.nbrPlacePL = parking.places.filter((value, index, array) => {
+          this.nbrPlacePL = parking.places.filter((value) => {
             return value.type == TypeCar.LONG && value.libre;
           }).length;
-          this.nbrPlaceElec = parking.places.filter((value, index, array) => {
+          this.nbrPlaceElec = parking.places.filter((value) => {
             return value.type == TypeCar.ELECTRIQUE && value.libre;
           }).length;
         });
 
-      this.horrodateurService.getBadHorrodateurFromParkingId(<string>params.get('id')).subscribe(
-        horrodateurs => {
-          horrodateurs.forEach(horrodateur => {
-            horrodateur.dateDepart = new Date(horrodateur.dateDepart);
-            horrodateur.dateArrivee = new Date(horrodateur.dateArrivee);
+      this.horodateurService.getBadHorodateurFromParkingId(<string>params.get('id')).subscribe(
+        horodateurs => {
+          horodateurs.forEach(horodateur => {
+            horodateur.dateDepart = new Date(horodateur.dateDepart);
+            horodateur.dateArrivee = new Date(horodateur.dateArrivee);
           });
-          this.problematiques = horrodateurs;
+          this.problematiques = horodateurs;
         }
       );
     });
   }
 
-  depassement(horrodateur: Horrodateur): Date {
+  depassement(horodateur: Horodateur): Date {
     let date = new Date();
-    let diff = date.getTime() - horrodateur.dateDepart.getTime();
+    let diff = date.getTime() - horodateur.dateDepart.getTime();
     date = new Date(diff);
     return date;
   }

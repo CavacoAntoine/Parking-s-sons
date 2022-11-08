@@ -1,11 +1,10 @@
 package com.agile.psbackspringboot.model;
 
 import javax.persistence.*;
-import java.util.Calendar;
 import java.util.Date;
 
 @Entity
-public class Horrodateur {
+public class Horodateur {
 
     @Id
     @GeneratedValue
@@ -25,10 +24,10 @@ public class Horrodateur {
 
     private boolean malGare;
 
-    public Horrodateur() {
+    public Horodateur() {
     }
 
-    public Horrodateur(Voiture voiture, Place place, Date hArrivee, Date dDepart, boolean dureeDepasse, boolean malGare) {
+    public Horodateur(Voiture voiture, Place place, Date hArrivee, Date dDepart, boolean dureeDepasse, boolean malGare) {
         this.voiture = voiture;
         this.place = place;
         this.dateArrivee = hArrivee;

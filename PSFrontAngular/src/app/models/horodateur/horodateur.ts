@@ -1,7 +1,7 @@
 import {Place} from "../place/place";
 import {Voiture} from "../Voiture/voiture";
 
-export class Horrodateur {
+export class Horodateur {
 
   id: number;
   voiture: Voiture;

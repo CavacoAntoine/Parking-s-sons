@@ -2,10 +2,10 @@ package com.agile.psbackspringboot.controllers;
 
 import com.agile.psbackspringboot.enums.TypeCar;
 import com.agile.psbackspringboot.message.ResponseMessage;
-import com.agile.psbackspringboot.model.Horrodateur;
+import com.agile.psbackspringboot.model.Horodateur;
 import com.agile.psbackspringboot.model.Place;
 import com.agile.psbackspringboot.model.Voiture;
-import com.agile.psbackspringboot.repository.HorrodateurRepository;
+import com.agile.psbackspringboot.repository.HorodateurRepository;
 import com.agile.psbackspringboot.repository.PlaceRepository;
 import com.agile.psbackspringboot.repository.VoitureRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,13 +26,13 @@ public class TestRESTController {
 
     VoitureRepository voitureRepository;
     PlaceRepository placeRepository;
-    HorrodateurRepository horrodateurRepository;
+    HorodateurRepository horodateurRepository;
 
     @Autowired
-    public TestRESTController(VoitureRepository voitureRepository, PlaceRepository placeRepository, HorrodateurRepository horrodateurRepository) {
+    public TestRESTController(VoitureRepository voitureRepository, PlaceRepository placeRepository, HorodateurRepository horodateurRepository) {
         this.voitureRepository = voitureRepository;
         this.placeRepository = placeRepository;
-        this.horrodateurRepository = horrodateurRepository;
+        this.horodateurRepository = horodateurRepository;
     }
 
     @PostMapping("/{number}")
@@ -48,7 +48,7 @@ public class TestRESTController {
 
         places.forEach(place -> place.setLibre(true));
         this.placeRepository.saveAll(places);
-        this.horrodateurRepository.deleteAll();
+        this.horodateurRepository.deleteAll();
 
         Random randomV = new Random();
         Random randomP = new Random();
@@ -65,7 +65,7 @@ public class TestRESTController {
 
             while(!find) {
                 voiture = getARandomVoiture(randomV, voitures);
-                if(horrodateurRepository.findByVoiture(voiture) == null)
+                if(horodateurRepository.findByVoiture(voiture) == null)
                     find = true;
             }
 
@@ -73,7 +73,7 @@ public class TestRESTController {
 
             while(!find) {
                 place = getARandomPlace(randomP, places);
-                if(horrodateurRepository.findByPlace(place) == null)
+                if(horodateurRepository.findByPlace(place) == null)
                     find = true;
             }
 
@@ -100,7 +100,7 @@ public class TestRESTController {
 
             place.setLibre(false);
             placeRepository.save(place);
-            horrodateurRepository.save(new Horrodateur(voiture, place, new Date(arrive.getTime().getTime()), depart.getTime(), dureeDepasse, malGare));
+            horodateurRepository.save(new Horodateur(voiture, place, new Date(arrive.getTime().getTime()), depart.getTime(), dureeDepasse, malGare));
         }
 
         return new ResponseEntity<>(new ResponseMessage("simulation faite"), HttpStatus.CREATED);

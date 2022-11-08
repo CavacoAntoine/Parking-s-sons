@@ -39,11 +39,11 @@
             </div>
             <div class="col-2-5">
               <div class="form-floating">
-                <input name="numero" type="number" class="form-control" id="numero" placeholder="0" [(ngModel)]="parking.adresse.numero" [min]="0" #numero="ngModel" required>
-                <label for="numero">Numéro</label>
+                <input name="numéro" type="number" class="form-control" id="numéro" placeholder="0" [(ngModel)]="parking.adresse.numero" [min]="0" #numero="ngModel" required>
+                <label for="numéro">Numéro</label>
               </div>
               <div class="alert-danger" *ngIf="f.submitted && numero.invalid">
-                <div *ngIf="['numero.errors?.required']">Numero requis</div>
+                <div *ngIf="['numero.errors?.required']">Numéro requis</div>
               </div>
             </div>
             <div class="col-9-5">
@@ -120,8 +120,8 @@
             </div>
             <div class="col-2-5">
               <div class="form-floating">
-                <input name="electrique" type="number" class="form-control" id="electrique" placeholder="0" [(ngModel)]="parking.nbrElecPlace" [min]="0" #elec="ngModel" required>
-                <label for="electrique">Place electrique</label>
+                <input name="électrique" type="number" class="form-control" id="électrique" placeholder="0" [(ngModel)]="parking.nbrElecPlace" [min]="0" #elec="ngModel" required>
+                <label for="électrique">Place électrique</label>
               </div>
               <div class="alert-danger" *ngIf="f.submitted && elec.invalid">
                 <div *ngIf="['elec.errors?.required']">Nombre requis</div>
@@ -133,7 +133,7 @@
             </div>
             <div class="col-12">
               <div *ngIf="f.submitted && !ok" class="alert alert-warning">
-                Ajout du parking echoué !<br/>
+                Ajout du parking échoué !<br/>
                 {{err}}
               </div>
               <div *ngIf="f.submitted && ok" class="alert alert-warning">
