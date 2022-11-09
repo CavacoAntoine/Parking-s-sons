@@ -20,6 +20,8 @@ jobs:
         cache: 'npm'
         cache-dependency-path: PSFrontAngular/package-lock.json
     
-    - run: npm ci
+    - run: |
+        cd ./PSFrontAngular
+        npm ci
     - run: |
         npm test -- --no-watch --no-progress --browsers=ChromeHeadlessCI
