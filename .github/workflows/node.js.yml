@@ -21,6 +21,7 @@ jobs:
       with:
         node-version: 14.x
         cache: 'npm'
+        cache-dependency-path: PSFrontAngular/package-lock.json
     
     - run: cd PSFrontAngular
     - run: npm ci
