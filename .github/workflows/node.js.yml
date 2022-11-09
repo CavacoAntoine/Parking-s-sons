@@ -18,8 +18,8 @@ jobs:
       with:
         node-version: 14.x
         cache: 'npm'
-        cache-dependency-path: PSFrontAngular/package-lock.json
+        cache-dependency-path: Parking-s-sons/PSFrontAngular/package-lock.json
     
-    - run: cd PSFrontAngular 
-        npm ci
+    - run: npm ci
+    - run: |
         npm test -- --no-watch --no-progress --browsers=ChromeHeadlessCI
