@@ -26,6 +26,13 @@ public class Adresse {
         this.id = id;
     }
 
+    public Adresse() {
+        this.numero = 0;
+        this.rue = "rue";
+        this.ville= "Ville";
+        this.codePostal = 0;
+    }
+
     public int getNumero() {
         return numero;
     }

@@ -5,6 +5,8 @@ import com.agile.psbackspringboot.exceptions.PlaceNotFoundException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+
 public class ParkingTests {
 
     @Test
@@ -55,6 +57,27 @@ public class ParkingTests {
         } catch (PlaceNotFoundException e) {
             Assertions.fail();
         }
+    }
+
+    @Test
+    public void shouldBeEquals() {
+        Parking parking1 = new Parking("Parking 1", new Adresse(), 1,2,3,4,5);
+        Parking parking2 = new Parking("Parking 1", new Adresse(), 1,2,3,4,5);
+
+        Assertions.assertEquals(parking1, parking2);
+    }
+
+    @Test
+    public void shouldNotBeEquals() {
+        Parking parking1 = new Parking("Parking 1", new Adresse(), 1,2,3,4,5);
+        Parking parking2 = new Parking("Parking 2", new Adresse(), 1,2,3,4,5);
+
+        Assertions.assertNotEquals(parking1, parking2);
+
+        parking2.setNom("Parking 1");
+        parking2.setPlaces(new ArrayList<>());
+
+        Assertions.assertNotEquals(parking1, parking2);
     }
 
 }

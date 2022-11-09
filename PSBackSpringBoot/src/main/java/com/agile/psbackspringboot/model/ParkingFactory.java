@@ -1,4 +1,4 @@
-package com.agile.psbackspringboot.creator;
+package com.agile.psbackspringboot.model;
 
 import com.agile.psbackspringboot.model.Adresse;
 import com.agile.psbackspringboot.model.Parking;
@@ -17,28 +17,56 @@ public class ParkingFactory {
         return nom;
     }
 
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
     public int getNbrNormPlace() {
         return nbrNormPlace;
+    }
+
+    public void setNbrNormPlace(int nbrNormPlace) {
+        this.nbrNormPlace = nbrNormPlace;
     }
 
     public int getNbrHandiPlace() {
         return nbrHandiPlace;
     }
 
+    public void setNbrHandiPlace(int nbrHandiPlace) {
+        this.nbrHandiPlace = nbrHandiPlace;
+    }
+
     public int getNbrDeuxRPlace() {
         return nbrDeuxRPlace;
+    }
+
+    public void setNbrDeuxRPlace(int nbrDeuxRPlace) {
+        this.nbrDeuxRPlace = nbrDeuxRPlace;
     }
 
     public int getNbrLongPlace() {
         return nbrLongPlace;
     }
 
+    public void setNbrLongPlace(int nbrLongPlace) {
+        this.nbrLongPlace = nbrLongPlace;
+    }
+
     public int getNbrElecPlace() {
         return nbrElecPlace;
     }
 
+    public void setNbrElecPlace(int nbrElecPlace) {
+        this.nbrElecPlace = nbrElecPlace;
+    }
+
     public Adresse getAdresse() {
         return adresse;
+    }
+
+    public void setAdresse(Adresse adresse) {
+        this.adresse = adresse;
     }
 
     public Parking create(){

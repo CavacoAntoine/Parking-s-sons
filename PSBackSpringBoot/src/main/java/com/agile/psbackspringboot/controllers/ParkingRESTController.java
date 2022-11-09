@@ -1,8 +1,8 @@
 package com.agile.psbackspringboot.controllers;
 
 import com.agile.psbackspringboot.comparator.ParkingSortByName;
-import com.agile.psbackspringboot.comparator.PlaceSortByType;
-import com.agile.psbackspringboot.creator.ParkingFactory;
+import com.agile.psbackspringboot.comparator.PlaceSortByNumero;
+import com.agile.psbackspringboot.model.ParkingFactory;
 import com.agile.psbackspringboot.enums.TypeCar;
 import com.agile.psbackspringboot.message.ResponseMessage;
 import com.agile.psbackspringboot.model.Horodateur;
@@ -86,7 +86,7 @@ public class ParkingRESTController {
         for (TypeCar type : TypeCar.values()) {
             placesLibres.addAll(parking.searchPlaceLibre(type));
         }
-        placesLibres.sort(new PlaceSortByType());
+        placesLibres.sort(new PlaceSortByNumero());
         return placesLibres;
     }
 

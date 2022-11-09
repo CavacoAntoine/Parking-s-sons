@@ -39,4 +39,42 @@ public class AdresseTests {
         Assertions.assertEquals(75001,adresse.getCodePostal());
     }
 
+    @Test
+    public void shouldBeEquals() {
+        Adresse adresse1 = new Adresse();
+        Adresse adresse2 = new Adresse();
+
+        Assertions.assertEquals(adresse1, adresse2);
+
+        adresse1.setNumero(15);
+        adresse1.setRue("chemin de l'orangerie");
+        adresse1.setCodePostal(77700);
+        adresse1.setVille("Chessy");
+        adresse2.setNumero(15);
+        adresse2.setRue("chemin de l'orangerie");
+        adresse2.setCodePostal(77700);
+        adresse2.setVille("Chessy");
+
+        Assertions.assertEquals(adresse1, adresse2);
+    }
+
+    @Test
+    public void shouldNotBeEquals() {
+        Adresse adresse1 = new Adresse();
+        adresse1.setNumero(15);
+        Adresse adresse2 = new Adresse();
+
+        Assertions.assertNotEquals(adresse1, adresse2);
+
+        adresse1.setRue("chemin de l'orangerie");
+        adresse1.setCodePostal(77700);
+        adresse1.setVille("Chessy");
+        adresse2.setNumero(15);
+        adresse2.setRue("chemi de l'orangerie");
+        adresse2.setCodePostal(77700);
+        adresse2.setVille("Chessy");
+
+        Assertions.assertNotEquals(adresse1, adresse2);
+    }
+
 }
